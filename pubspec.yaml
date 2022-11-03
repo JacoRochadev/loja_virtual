@@ -1,0 +1,30 @@
+name: loja_virtual
+description: A new Flutter project.
+publish_to: 'none'
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.6.0 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  provider: ^5.0.0
+  cloud_firestore: ^3.4.8
+  firebase_auth: ^3.9.0
+  firebase_storage: ^10.3.8
+  firebase_core: ^1.22.0
+  carousel_slider: ^4.1.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
