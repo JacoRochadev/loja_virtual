@@ -6,7 +6,7 @@ import '../../../models/product_manager.dart';
 import '../../../models/section_item.dart';
 
 class ItemTile extends StatelessWidget {
-  const ItemTile(this.item);
+  const ItemTile(this.item, {Key key}) : super(key: key);
 
   final SectionItem item;
 

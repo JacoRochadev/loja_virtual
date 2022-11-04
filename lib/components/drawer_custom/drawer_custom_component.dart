@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:loja_virtual/components/drawer_custom/drawer_header_custom_component.dart';
 
 import 'package:loja_virtual/components/drawer_custom/drawer_tile_custom_component.dart';
+import 'package:provider/provider.dart';
+
+import '../../models/user_manager.dart';
 
 class DrawerCustomComponent extends StatelessWidget {
   const DrawerCustomComponent({
@@ -26,19 +29,45 @@ class DrawerCustomComponent extends StatelessWidget {
             ),
           ),
           ListView(
-            children: const <Widget>[
-              DrawerHeaderCustomComponent(),
-              Divider(),
-              DrawerTileCustomComponent(
+            children: <Widget>[
+              const DrawerHeaderCustomComponent(),
+              const Divider(),
+              const DrawerTileCustomComponent(
                   icon: Icons.home, title: 'Início', page: 0),
-              DrawerTileCustomComponent(
+              const DrawerTileCustomComponent(
                   icon: Icons.list, title: 'Produtos', page: 1),
-              DrawerTileCustomComponent(
+              const DrawerTileCustomComponent(
                   icon: Icons.playlist_add_check,
                   title: 'Meus Pedidos',
                   page: 2),
-              DrawerTileCustomComponent(
-                  icon: Icons.location_on, title: 'Lojas', page: 3),
+              const DrawerTileCustomComponent(
+                icon: Icons.location_on,
+                title: 'Lojas',
+                page: 3,
+              ),
+              Consumer<UserManager>(
+                builder: (_, userManager, __) {
+                  if (userManager.adminEnabled) {
+                    return Column(
+                      children: [
+                        const Divider(),
+                        const DrawerTileCustomComponent(
+                          icon: Icons.settings,
+                          title: 'Usuários',
+                          page: 4,
+                        ),
+                        const DrawerTileCustomComponent(
+                          icon: Icons.settings,
+                          title: 'Pedidos',
+                          page: 5,
+                        ),
+                      ],
+                    );
+                  } else {
+                    return Container();
+                  }
+                },
+              ),
             ],
           ),
         ],

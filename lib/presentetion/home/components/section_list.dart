@@ -25,13 +25,6 @@ class SectionList extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemBuilder: (_, index) {
                 return ItemTile(section.items[index]);
-                // return AspectRatio(
-                //   aspectRatio: 1,
-                //   child: Image.network(
-                //     section.items[index].image,
-                //     fit: BoxFit.cover,
-                //   ),
-                // );
               },
               separatorBuilder: (_, __) => const SizedBox(
                 width: 4,
