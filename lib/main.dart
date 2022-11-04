@@ -36,16 +36,16 @@ class MyApp extends StatelessWidget {
           create: (_) => ProductManager(),
           lazy: false,
         ),
+        ChangeNotifierProvider(
+          create: (_) => HomeManager(),
+          lazy: false,
+        ),
         ChangeNotifierProxyProvider<UserManager, CartManager>(
           create: (_) => CartManager(),
           lazy: false,
           update: (_, userManager, cartManager) =>
               cartManager..updateUser(userManager),
-        ),
-        Provider(
-          create: (_) => HomeManager(),
-          lazy: false,
-        ),
+        )
       ],
       child: MaterialApp(
         title: 'Loja virtual',
