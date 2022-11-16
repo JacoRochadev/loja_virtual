@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../models/product.dart';
+import 'components/images_form.dart';
+
 class EditProductScreen extends StatelessWidget {
-  const EditProductScreen({Key key}) : super(key: key);
+  final ProductModel product;
+  const EditProductScreen({Key key, this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,8 +14,12 @@ class EditProductScreen extends StatelessWidget {
         title: const Text('Editar Produto'),
         centerTitle: true,
       ),
-      body: const Center(
-        child: Text('Editar Produto'),
+      body: ListView(
+        children: [
+          ImagesForm(
+            product: product,
+          ),
+        ],
       ),
     );
   }
