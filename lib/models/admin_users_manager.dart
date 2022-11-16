@@ -1,6 +1,6 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:faker/faker.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:loja_virtual/models/user.dart';
 import 'package:loja_virtual/models/user_manager.dart';
@@ -8,6 +8,7 @@ import 'package:loja_virtual/models/user_manager.dart';
 class AdminUserManager extends ChangeNotifier {
   List<UserModel> users = [];
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  StreamSubscription _subscription;
 
   void updateUser(UserManager userManager) {
     if (userManager.adminEnabled) {
@@ -23,7 +24,8 @@ class AdminUserManager extends ChangeNotifier {
     //   users.add(
     //       UserModel(name: faker.person.name(), email: faker.internet.email()));
     // }
-    firestore.collection('users').snapshots().listen((snapshot) {
+    _subscription =
+        firestore.collection('users').snapshots().listen((snapshot) {
       users = snapshot.docs.map((e) => UserModel.fromDocument(e)).toList();
       users.sort(
           ((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase())));
@@ -32,4 +34,10 @@ class AdminUserManager extends ChangeNotifier {
   }
 
   List<String> get names => users.map((e) => e.name).toList();
+
+  @override
+  void dispose() {
+    _subscription?.cancel();
+    super.dispose();
+  }
 }
