@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 import '../../../models/product.dart';
+import 'image_source_sheet.dart';
 
 class ImagesForm extends StatelessWidget {
   final ProductModel product;
@@ -15,7 +16,7 @@ class ImagesForm extends StatelessWidget {
         return AspectRatio(
           aspectRatio: 1,
           child: CarouselSlider(
-            items: state.value.map((image) {
+            items: state.value.map<Widget>((image) {
               return Stack(
                 children: [
                   if (image is String)
@@ -39,7 +40,24 @@ class ImagesForm extends StatelessWidget {
                       ))
                 ],
               );
-            }).toList(),
+            }).toList()
+              ..add(
+                Center(
+                  child: Material(
+                    color: Colors.grey[100],
+                    child: IconButton(
+                      icon: const Icon(Icons.add_a_photo),
+                      color: Theme.of(context).primaryColor,
+                      iconSize: 50,
+                      onPressed: () {
+                        showModalBottomSheet(
+                            context: context,
+                            builder: (_) => ImageSourceSheet());
+                      },
+                    ),
+                  ),
+                ),
+              ),
             options: CarouselOptions(
               height: 400,
               aspectRatio: 1,
