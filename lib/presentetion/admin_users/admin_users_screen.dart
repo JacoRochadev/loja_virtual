@@ -1,5 +1,6 @@
 import 'package:alphabet_list_scroll_view/alphabet_list_scroll_view.dart';
 import 'package:flutter/material.dart';
+import 'package:loja_virtual/components/drawer_custom/drawer_custom_component.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/admin_users_manager.dart';
@@ -10,6 +11,7 @@ class AdminUserScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const DrawerCustomComponent(),
       appBar: AppBar(
         title: const Text('Usuários'),
         centerTitle: true,
