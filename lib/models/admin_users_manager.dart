@@ -23,7 +23,7 @@ class AdminUserManager extends ChangeNotifier {
     //   users.add(
     //       UserModel(name: faker.person.name(), email: faker.internet.email()));
     // }
-    firestore.collection('users').get().then((snapshot) {
+    firestore.collection('users').snapshots().listen((snapshot) {
       users = snapshot.docs.map((e) => UserModel.fromDocument(e)).toList();
       users.sort(
           ((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase())));
