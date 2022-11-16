@@ -20,6 +20,9 @@ class AdminUserManager extends ChangeNotifier {
       users.add(
           UserModel(name: faker.person.name(), email: faker.internet.email()));
     }
+    users
+        .sort(((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase())));
+
     notifyListeners();
   }
 
