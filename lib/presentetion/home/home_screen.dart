@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: DrawerCustomComponent(),
+      drawer: const DrawerCustomComponent(),
       body: Stack(
         children: [
           Container(

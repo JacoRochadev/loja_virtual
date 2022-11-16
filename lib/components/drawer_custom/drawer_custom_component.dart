@@ -49,14 +49,14 @@ class DrawerCustomComponent extends StatelessWidget {
                 builder: (_, userManager, __) {
                   if (userManager.adminEnabled) {
                     return Column(
-                      children: [
-                        const Divider(),
-                        const DrawerTileCustomComponent(
+                      children: const [
+                        Divider(),
+                        DrawerTileCustomComponent(
                           icon: Icons.settings,
                           title: 'Usuários',
                           page: 4,
                         ),
-                        const DrawerTileCustomComponent(
+                        DrawerTileCustomComponent(
                           icon: Icons.settings,
                           title: 'Pedidos',
                           page: 5,
