@@ -87,7 +87,7 @@ class ProductScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'R\$ 19.99',
+                    'R\$ ${product.basePrice.toStringAsFixed(2)}',
                     style: Theme.of(context).textTheme.headline6.copyWith(
                           color: primaryColor,
                           fontWeight: FontWeight.bold,
@@ -104,7 +104,7 @@ class ProductScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'Cmiseta muito boa',
+                    product.description,
                     style: Theme.of(context).textTheme.subtitle1.copyWith(
                           color: Colors.black,
                         ),
