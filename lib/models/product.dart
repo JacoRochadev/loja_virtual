@@ -24,11 +24,16 @@ class ProductModel extends ChangeNotifier {
     }
   }
 
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  DocumentReference get firestoreRef => firestore.doc('products/$id');
+
   String id;
   String name;
   String description;
   List<String> images;
   List<ItemSize> sizes;
+  List<dynamic> newImages;
 
   ItemSize _selectedSize;
   ItemSize get selectedSize => _selectedSize;
@@ -73,5 +78,25 @@ class ProductModel extends ChangeNotifier {
       ..description = description
       ..images = List.from(images)
       ..sizes = sizes.map((size) => size.clone()).toList();
+  }
+
+  List<Map<String, dynamic>> exportSizeList() {
+    return sizes.map((size) => size.toMap()).toList();
+  }
+
+  Future<void> save() async {
+    final Map<String, dynamic> data = {
+      'name': name,
+      'description': description,
+      //'images': images,
+      'sizes': exportSizeList(),
+    };
+
+    if (id == null) {
+      final doc = await firestore.collection('products').add(data);
+      id = doc.id;
+    } else {
+      await firestoreRef.update(data);
+    }
   }
 }

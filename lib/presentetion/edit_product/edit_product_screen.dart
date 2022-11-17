@@ -53,6 +53,7 @@ class EditProductScreen extends StatelessWidget {
                       }
                       return null;
                     },
+                    onSaved: (name) => product.name = name,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 4),
@@ -100,6 +101,7 @@ class EditProductScreen extends StatelessWidget {
                       }
                       return null;
                     },
+                    onSaved: (description) => product.description = description,
                   ),
                   SizesForm(product: product),
                   const SizedBox(height: 20),
@@ -113,8 +115,8 @@ class EditProductScreen extends StatelessWidget {
                       ),
                       onPressed: () {
                         if (formKey.currentState.validate()) {
-                          debugPrint('válido');
-                          // se entrar aqui vai salvar no firebase
+                          formKey.currentState.save();
+                          product.save();
                         }
                       },
                       child: const Text('Salvar'),
