@@ -1,10 +1,12 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ImageSourceSheet extends StatelessWidget {
-  const ImageSourceSheet({Key key}) : super(key: key);
+  final ImagePicker picker = ImagePicker();
+  final Function(File) onImageSelected;
+  ImageSourceSheet({Key key, this.onImageSelected}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,11 @@ class ImageSourceSheet extends StatelessWidget {
                     elevation: 0,
                     primary: Colors.white,
                   ),
-                  onPressed: () {},
+                  onPressed: () async {
+                    final file =
+                        await picker.pickImage(source: ImageSource.camera);
+                    onImageSelected(File(file.path));
+                  },
                   child: Text(
                     'Câmera',
                     style: Theme.of(context).textTheme.subtitle1.copyWith(
@@ -33,7 +39,13 @@ class ImageSourceSheet extends StatelessWidget {
                     elevation: 0,
                     primary: Colors.white,
                   ),
-                  onPressed: () {},
+                  onPressed: () async {
+                    final file =
+                        await picker.pickImage(source: ImageSource.gallery);
+                    onImageSelected(File(file.path));
+
+                    //final file = XFile(picker.pickImage(source: ImageSource.gallery));
+                  },
                   child: Text(
                     'Galeria',
                     style: Theme.of(context).textTheme.subtitle1.copyWith(
