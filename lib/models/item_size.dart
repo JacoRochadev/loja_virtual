@@ -15,4 +15,11 @@ class ItemSize {
   String toString() {
     return 'ItemSize{name: $name, price: $price, stock: $stock}';
   }
+
+  ItemSize clone() {
+    return ItemSize()
+      ..name = name
+      ..price = price
+      ..stock = stock;
+  }
 }

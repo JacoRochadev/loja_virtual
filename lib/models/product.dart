@@ -4,6 +4,11 @@ import 'package:loja_virtual/models/item_size.dart';
 
 class ProductModel extends ChangeNotifier {
   //ProductModel({this.name, this.description, this.images});
+  ProductModel(
+      {this.id, this.name, this.description, this.images, this.sizes}) {
+    images = images ?? [];
+    sizes = sizes ?? [];
+  }
 
   ProductModel.fromDocument(DocumentSnapshot document) {
     id = document.id;
@@ -59,5 +64,14 @@ class ProductModel extends ChangeNotifier {
     } catch (e) {
       return null;
     }
+  }
+
+  ProductModel clone() {
+    return ProductModel()
+      ..id = id
+      ..name = name
+      ..description = description
+      ..images = List.from(images)
+      ..sizes = sizes.map((size) => size.clone()).toList();
   }
 }

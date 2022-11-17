@@ -5,15 +5,20 @@ import 'components/sizes_form.dart';
 
 class EditProductScreen extends StatelessWidget {
   final ProductModel product;
-  EditProductScreen({Key key, this.product}) : super(key: key);
+
+  EditProductScreen({ProductModel product, Key key})
+      : editing = product != null,
+        product = product != null ? product.clone() : ProductModel(),
+        super(key: key);
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final bool editing;
 
   @override
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).primaryColor;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Editar Produto'),
+        title: Text(editing ? 'Editar Produto' : 'Criar Produto'),
         centerTitle: true,
       ),
       backgroundColor: Colors.white,
@@ -97,14 +102,23 @@ class EditProductScreen extends StatelessWidget {
                     },
                   ),
                   SizesForm(product: product),
-                  ElevatedButton(
-                    onPressed: () {
-                      if (formKey.currentState.validate()) {
-                        debugPrint('válido');
-                        // se entrar aqui vai salvar no firebase
-                      }
-                    },
-                    child: const Text('Salvar'),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    height: 44,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Theme.of(context).primaryColor,
+                        disabledBackgroundColor:
+                            Theme.of(context).primaryColor.withAlpha(200),
+                      ),
+                      onPressed: () {
+                        if (formKey.currentState.validate()) {
+                          debugPrint('válido');
+                          // se entrar aqui vai salvar no firebase
+                        }
+                      },
+                      child: const Text('Salvar'),
+                    ),
                   ),
                 ],
               ),
