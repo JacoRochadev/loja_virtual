@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../models/product.dart';
 import 'components/images_form.dart';
+import 'components/sizes_form.dart';
 
 class EditProductScreen extends StatelessWidget {
   final ProductModel product;
@@ -76,7 +77,6 @@ class EditProductScreen extends StatelessWidget {
                   ),
                   TextFormField(
                     initialValue: product.description,
-                    maxLines: 6,
                     decoration: const InputDecoration(
                       labelText: 'Descrição',
                       border: InputBorder.none,
@@ -96,10 +96,11 @@ class EditProductScreen extends StatelessWidget {
                       return null;
                     },
                   ),
+                  SizesForm(product: product),
                   ElevatedButton(
                     onPressed: () {
                       if (formKey.currentState.validate()) {
-                        print('válido');
+                        debugPrint('válido');
                         // se entrar aqui vai salvar no firebase
                       }
                     },

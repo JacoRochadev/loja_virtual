@@ -1,4 +1,5 @@
 class ItemSize {
+  ItemSize();
   ItemSize.fromMap(Map<String, dynamic> map) {
     name = map['name'] as String;
     stock = map['stock'] as int;
