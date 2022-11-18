@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:loja_virtual/models/item_size.dart';
+import 'package:uuid/uuid.dart';
 
 class ProductModel extends ChangeNotifier {
   //ProductModel({this.name, this.description, this.images});
@@ -25,8 +29,10 @@ class ProductModel extends ChangeNotifier {
   }
 
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final FirebaseStorage storage = FirebaseStorage.instance;
 
   DocumentReference get firestoreRef => firestore.doc('products/$id');
+  Reference get storageRef => storage.ref().child('products').child(id);
 
   String id;
   String name;
@@ -98,5 +104,32 @@ class ProductModel extends ChangeNotifier {
     } else {
       await firestoreRef.update(data);
     }
+
+    final List<String> updateImages = [];
+
+    for (final newImage in newImages) {
+      if (images.contains(newImage)) {
+        updateImages.add(newImage as String);
+      } else {
+        final UploadTask task =
+            storageRef.child(const Uuid().v1()).putFile(newImage as File);
+        final TaskSnapshot snapshot = await task.whenComplete(() => null);
+        final String url = await snapshot.ref.getDownloadURL();
+        updateImages.add(url);
+      }
+    }
+
+    for (final image in images) {
+      if (!newImages.contains(image) && image.contains('firebase')) {
+        try {
+          final ref = storage.ref(image);
+          await ref.delete();
+        } catch (e) {
+          debugPrint('Falha ao deletar $image');
+        }
+      }
+    }
+
+    await firestoreRef.update({'images': updateImages});
   }
 }
