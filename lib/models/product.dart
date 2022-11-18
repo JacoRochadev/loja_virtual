@@ -41,9 +41,15 @@ class ProductModel extends ChangeNotifier {
   List<ItemSize> sizes;
   List<dynamic> newImages;
 
+  bool _loading = false;
+  bool get loading => _loading;
+  set loading(bool value) {
+    _loading = value;
+    notifyListeners();
+  }
+
   ItemSize _selectedSize;
   ItemSize get selectedSize => _selectedSize;
-
   set selectedSize(ItemSize value) {
     _selectedSize = value;
     notifyListeners();
@@ -91,6 +97,7 @@ class ProductModel extends ChangeNotifier {
   }
 
   Future<void> save() async {
+    loading = true;
     final Map<String, dynamic> data = {
       'name': name,
       'description': description,
@@ -131,5 +138,8 @@ class ProductModel extends ChangeNotifier {
     }
 
     await firestoreRef.update({'images': updateImages});
+    images = updateImages;
+
+    loading = false;
   }
 }
