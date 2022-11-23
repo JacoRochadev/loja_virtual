@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:loja_virtual/components/drawer_custom/drawer_custom_component.dart';
 import 'package:loja_virtual/models/home_manager.dart';
+import 'package:loja_virtual/models/user_manager.dart';
 import 'package:loja_virtual/presentetion/home/components/Section_list.dart';
 import 'package:provider/provider.dart';
 
+import 'components/add_section_widget.dart';
 import 'components/section_staggered.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -44,6 +46,39 @@ class HomeScreen extends StatelessWidget {
                     color: Colors.white,
                     onPressed: () => Navigator.of(context).pushNamed('/cart'),
                   ),
+                  Consumer2<UserManager, HomeManager>(
+                      builder: (_, userManager, homeManager, __) {
+                    if (userManager.adminEnabled) {
+                      if (homeManager.editing) {
+                        return PopupMenuButton(
+                          onSelected: (e) {
+                            if (e == 'Salvar') {
+                              homeManager.saveEditing();
+                            } else {
+                              homeManager.discardEditing();
+                            }
+                          },
+                          itemBuilder: (_) => const [
+                            PopupMenuItem(
+                              value: 'Salvar',
+                              child: Text('Salvar'),
+                            ),
+                            PopupMenuItem(
+                              value: 'Descartar',
+                              child: Text('Descartar'),
+                            ),
+                          ],
+                        );
+                      } else {
+                        return IconButton(
+                          icon: const Icon(Icons.edit),
+                          onPressed: homeManager.enterEditing,
+                        );
+                      }
+                    } else {
+                      return Container();
+                    }
+                  })
                 ],
               ),
               Consumer<HomeManager>(builder: (_, homeManager, __) {
@@ -58,6 +93,10 @@ class HomeScreen extends StatelessWidget {
                       return Container();
                   }
                 }).toList();
+                if (homeManager.editing) {
+                  children.add(const AddSectionWidget());
+                }
+
                 return SliverList(
                   delegate: SliverChildListDelegate(children),
                 );
