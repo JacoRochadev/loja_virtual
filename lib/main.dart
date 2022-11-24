@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:loja_virtual/models/admin_users_manager.dart';
 import 'package:loja_virtual/models/cart_manager.dart';
 import 'package:loja_virtual/models/home_manager.dart';
+import 'package:loja_virtual/presentetion/adress/adress_screen.dart';
 import 'package:loja_virtual/presentetion/base/base_screen.dart';
 import 'package:loja_virtual/presentetion/cart/cart_screen.dart';
 import 'package:loja_virtual/presentetion/edit_product/edit_product_screen.dart';
 import 'package:loja_virtual/presentetion/login/login_screen.dart';
 import 'package:loja_virtual/presentetion/product/product_screen.dart';
 import 'package:loja_virtual/presentetion/select_product/select_product_screen.dart';
+import 'package:loja_virtual/services/cep_aberto.dart';
 import 'package:provider/provider.dart';
 
 import 'models/product.dart';
@@ -92,6 +94,11 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(
                   builder: (_) => const SelectProductScreen(),
                   settings: settings);
+            case '/adress':
+              return MaterialPageRoute(
+                builder: (_) => const AdressScreen(),
+                settings: settings,
+              );
             case '/base':
             default:
               return MaterialPageRoute(
