@@ -21,6 +21,6 @@ class SectionItem {
 
   @override
   String toString() {
-    return 'SectionItem{image: $product, image: $product}';
+    return 'SectionItem{image: $image, product: $product}';
   }
 }

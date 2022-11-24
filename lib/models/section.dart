@@ -16,8 +16,8 @@ class Section extends ChangeNotifier {
     id = document.id;
     name = document['name'] as String;
     type = document['type'] as String;
-    items = (document['items'] as List<dynamic> ?? [])
-        .map((e) => SectionItem.fromMap(e as Map<String, dynamic>))
+    items = (document['items'] as List)
+        .map((i) => SectionItem.fromMap(i as Map<String, dynamic>))
         .toList();
   }
 
@@ -77,7 +77,7 @@ class Section extends ChangeNotifier {
     for (final original in originalItems) {
       if (!items.contains(original)) {
         try {
-          final ref = storage.ref(original.image as String);
+          final ref = storage.refFromURL(original.image as String);
           await ref.delete();
         } catch (e) {
           debugPrint('Falha ao deletar $items');
@@ -96,7 +96,7 @@ class Section extends ChangeNotifier {
     await firestoreRef.delete();
     for (final item in items) {
       try {
-        final ref = await storage.ref(item.image as String);
+        final ref = storage.refFromURL(item.image as String);
         await ref.delete();
       } catch (e) {
         debugPrint('Falha ao deletar $items');
