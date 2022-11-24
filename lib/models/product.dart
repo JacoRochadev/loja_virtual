@@ -101,7 +101,6 @@ class ProductModel extends ChangeNotifier {
     final Map<String, dynamic> data = {
       'name': name,
       'description': description,
-      //'images': images,
       'sizes': exportSizeList(),
     };
 

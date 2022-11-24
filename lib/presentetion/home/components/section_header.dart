@@ -12,30 +12,45 @@ class SectionHeader extends StatelessWidget {
     final section = context.watch<Section>();
     final homeManager = context.watch<HomeManager>();
     if (homeManager.editing) {
-      return Row(
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            child: TextFormField(
-              initialValue: section.name,
-              decoration: const InputDecoration(
-                hintText: 'Título',
-                isDense: true,
-                border: InputBorder.none,
-              ),
-              style: Theme.of(context).textTheme.subtitle1.copyWith(
-                    fontWeight: FontWeight.w800,
-                    color: Colors.white,
+          Row(
+            children: [
+              Expanded(
+                child: TextFormField(
+                  initialValue: section.name,
+                  decoration: const InputDecoration(
+                    hintText: 'Título',
+                    isDense: true,
+                    border: InputBorder.none,
                   ),
-              onChanged: (text) => section.name = text,
+                  style: Theme.of(context).textTheme.subtitle1.copyWith(
+                        fontWeight: FontWeight.w800,
+                        color: Colors.white,
+                      ),
+                  onChanged: (text) => section.name = text,
+                ),
+              ),
+              IconButton(
+                icon: const Icon(Icons.remove),
+                color: Colors.white,
+                onPressed: () {
+                  homeManager.removeSection(section);
+                },
+              ),
+            ],
+          ),
+          if (section.error != null)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Text(
+                section.error,
+                style: const TextStyle(
+                  color: Colors.red,
+                ),
+              ),
             ),
-          ),
-          IconButton(
-            icon: const Icon(Icons.remove),
-            color: Colors.white,
-            onPressed: () {
-              homeManager.removeSection(section);
-            },
-          ),
         ],
       );
     } else {
