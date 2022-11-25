@@ -13,7 +13,7 @@ class CepAbertoService {
     dio.options.headers[HttpHeaders.authorizationHeader] = 'Token token=$token';
     try {
       final response = await dio.get<Map<String, dynamic>>(endpoint.toString());
-      if (response.data.containsKey('erro') || response.data.isEmpty) {
+      if (response.data.isEmpty) {
         return Future.error('CEP não encontrado');
       }
       final CepAbertoAdress adress = CepAbertoAdress.fromMap(response.data);

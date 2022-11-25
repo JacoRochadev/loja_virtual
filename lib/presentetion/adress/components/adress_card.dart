@@ -28,10 +28,15 @@ class AdressCard extends StatelessWidget {
                     fontSize: 16,
                   ),
                 ),
-                CepInputField(),
-                if (adress.zip != null)
-                  AdressInputField(
-                    adress: adress,
+                CepInputField(adress: adress),
+                if (adress.zip != null && cartManager.deliveryPrice == null)
+                  AdressInputField(adress: adress),
+                if (adress.zip != null && cartManager.deliveryPrice != null)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: Text(
+                        '${adress.street}, ${adress.number}\n${adress.district}\n'
+                        '${adress.city} - ${adress.state}'),
                   ),
               ],
             );
