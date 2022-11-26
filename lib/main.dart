@@ -10,7 +10,6 @@ import 'package:loja_virtual/presentetion/edit_product/edit_product_screen.dart'
 import 'package:loja_virtual/presentetion/login/login_screen.dart';
 import 'package:loja_virtual/presentetion/product/product_screen.dart';
 import 'package:loja_virtual/presentetion/select_product/select_product_screen.dart';
-import 'package:loja_virtual/services/cep_aberto.dart';
 import 'package:provider/provider.dart';
 
 import 'models/product.dart';

@@ -7,11 +7,17 @@ import 'package:loja_virtual/presentetion/products/products_screen.dart';
 import 'package:provider/provider.dart';
 import '../../components/drawer_custom/drawer_custom_component.dart';
 
-class BaseScreen extends StatelessWidget {
-  final pageController = PageController();
-  BaseScreen({
+class BaseScreen extends StatefulWidget {
+  const BaseScreen({
     Key key,
   }) : super(key: key);
+
+  @override
+  State<BaseScreen> createState() => _BaseScreenState();
+}
+
+class _BaseScreenState extends State<BaseScreen> {
+  final pageController = PageController();
 
   @override
   Widget build(BuildContext context) {

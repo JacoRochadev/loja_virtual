@@ -30,10 +30,21 @@ class CartManager extends ChangeNotifier {
 
   void updateUser(UserManager userManager) {
     user = userManager.userModel;
+    productsPrice = 0.0;
     items.clear();
+    removeAdress();
 
     if (user != null) {
       _loadCartItems();
+      _loadUserAdress();
+    }
+  }
+
+  Future<void> _loadUserAdress() async {
+    if (user.adress != null &&
+        await calculateDelivery(user.adress.latitude, user.adress.longitude)) {
+      adress = user.adress;
+      notifyListeners();
     }
   }
 
@@ -100,26 +111,29 @@ class CartManager extends ChangeNotifier {
 
   bool get isAdressValid => adress != null && deliveryPrice != null;
 
-  Future<void> getAdress(String cep) async {
+  Future<void> getadress(String cep) async {
     loading = true;
+
     final cepAbertoService = CepAbertoService();
+
     try {
-      final cepAbertoAdress = await cepAbertoService.getAdressFromCep(cep);
-      if (cepAbertoAdress != null) {
+      final cepAbertoadress = await cepAbertoService.getAdressFromCep(cep);
+
+      if (cepAbertoadress != null) {
         adress = Adress(
-          street: cepAbertoAdress.logradouro,
-          district: cepAbertoAdress.bairro,
-          city: cepAbertoAdress.cidade.nome,
-          state: cepAbertoAdress.estado.sigla,
-          zip: cepAbertoAdress.cep,
-          latitude: cepAbertoAdress.latitude,
-          longitude: cepAbertoAdress.longitude,
-        );
+            street: cepAbertoadress.logradouro,
+            district: cepAbertoadress.bairro,
+            zip: cepAbertoadress.cep,
+            city: cepAbertoadress.cidade.nome,
+            state: cepAbertoadress.estado.sigla,
+            latitude: cepAbertoadress.latitude,
+            longitude: cepAbertoadress.longitude);
       }
+
       loading = false;
-    } on Exception catch (e) {
+    } catch (e) {
       loading = false;
-      return Future.error('CEP inválido');
+      return Future.error('CEP Inválido');
     }
   }
 
@@ -134,6 +148,7 @@ class CartManager extends ChangeNotifier {
     this.adress = adress;
 
     if (await calculateDelivery(adress.latitude, adress.longitude)) {
+      user.setAdress(adress);
       loading = false;
     } else {
       loading = false;
@@ -151,10 +166,9 @@ class CartManager extends ChangeNotifier {
     final km = doc['km'] as num;
 
     double distance =
-        await Geolocator.distanceBetween(latStore, longStore, lat, long);
+        Geolocator.distanceBetween(latStore, longStore, lat, long);
     distance /= 1000.0;
 
-    debugPrint('distance: $distance');
     if (distance > maxkm) {
       return false;
     }

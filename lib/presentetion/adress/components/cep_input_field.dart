@@ -40,7 +40,7 @@ class CepInputField extends StatelessWidget {
                     if (Form.of(context).validate()) {
                       await context
                           .read<CartManager>()
-                          .getAdress(cepController.text);
+                          .getadress(cepController.text);
                     }
                   }
                 : null,
