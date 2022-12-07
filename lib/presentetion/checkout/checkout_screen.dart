@@ -12,6 +12,8 @@ class CheckoutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProxyProvider<CartManager, CheckoutManager>(
       create: (_) => CheckoutManager(),
+      update: (_, cartManager, checkoutManager) =>
+          checkoutManager..updateCart(cartManager),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Pagamento'),
