@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:loja_virtual/components/price_card.dart';
+import 'package:loja_virtual/models/cart_manager.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/checkout_model.dart';
+import '../../models/checkout_manager.dart';
 
 class CheckoutScreen extends StatelessWidget {
   const CheckoutScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => CheckoutModel(),
+    return ChangeNotifierProxyProvider<CartManager, CheckoutManager>(
+      create: (_) => CheckoutManager(),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Pagamento'),
