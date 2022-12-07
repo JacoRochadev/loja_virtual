@@ -115,7 +115,7 @@ class EditProductScreen extends StatelessWidget {
                         height: 44,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: Theme.of(context).primaryColor,
+                            backgroundColor: Theme.of(context).primaryColor,
                             disabledBackgroundColor:
                                 Theme.of(context).primaryColor.withAlpha(200),
                           ),
@@ -124,9 +124,11 @@ class EditProductScreen extends StatelessWidget {
                                   if (formKey.currentState.validate()) {
                                     formKey.currentState.save();
                                     await product.save();
+                                    // ignore: use_build_context_synchronously
                                     context
                                         .read<ProductManager>()
                                         .update(product);
+                                    // ignore: use_build_context_synchronously
                                     Navigator.of(context).pop();
                                   }
                                 }

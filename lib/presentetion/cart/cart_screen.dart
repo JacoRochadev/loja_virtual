@@ -20,7 +20,7 @@ class CartScreen extends StatelessWidget {
       body: Consumer<CartManager>(
         builder: (_, cartManager, __) {
           if (cartManager.user == null) {
-            return LoginCard();
+            return const LoginCard();
           }
           if (cartManager.items.isEmpty) {
             return const EmptyCard(

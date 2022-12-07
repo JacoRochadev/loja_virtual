@@ -6,6 +6,7 @@ import 'package:loja_virtual/models/home_manager.dart';
 import 'package:loja_virtual/presentetion/adress/adress_screen.dart';
 import 'package:loja_virtual/presentetion/base/base_screen.dart';
 import 'package:loja_virtual/presentetion/cart/cart_screen.dart';
+import 'package:loja_virtual/presentetion/checkout_screen/checkout_screen.dart';
 import 'package:loja_virtual/presentetion/edit_product/edit_product_screen.dart';
 import 'package:loja_virtual/presentetion/login/login_screen.dart';
 import 'package:loja_virtual/presentetion/product/product_screen.dart';
@@ -98,10 +99,15 @@ class MyApp extends StatelessWidget {
                 builder: (_) => const AdressScreen(),
                 settings: settings,
               );
+            case '/checkout':
+              return MaterialPageRoute(
+                builder: (_) => const CheckoutScreen(),
+                settings: settings,
+              );
             case '/base':
             default:
               return MaterialPageRoute(
-                  builder: (_) => BaseScreen(), settings: settings);
+                  builder: (_) => const BaseScreen(), settings: settings);
           }
         },
       ),

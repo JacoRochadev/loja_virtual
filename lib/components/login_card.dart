@@ -36,7 +36,7 @@ class LoginCard extends StatelessWidget {
                   Navigator.of(context).pushNamed('/login');
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: Theme.of(context).primaryColor,
+                  backgroundColor: Theme.of(context).primaryColor,
                 ),
                 child: const Text(
                   'Login',

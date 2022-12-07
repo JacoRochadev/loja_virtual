@@ -44,7 +44,7 @@ class ImageSourceSheet extends StatelessWidget {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     elevation: 0,
-                    primary: Colors.white,
+                    backgroundColor: Colors.white,
                   ),
                   onPressed: () async {
                     final file =
@@ -61,7 +61,7 @@ class ImageSourceSheet extends StatelessWidget {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     elevation: 0,
-                    primary: Colors.white,
+                    backgroundColor: Colors.white,
                   ),
                   onPressed: () async {
                     final file =

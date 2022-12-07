@@ -18,8 +18,8 @@ class AddSectionWidget extends StatelessWidget {
               homeManager.addSection(Section(type: 'List'));
             },
             style: ElevatedButton.styleFrom(
-              onPrimary: Colors.white,
-              primary: Colors.white.withAlpha(50),
+              disabledBackgroundColor: Colors.white,
+              backgroundColor: Colors.white.withAlpha(50),
             ),
             child: const Text('Adicionar lista'),
           ),
@@ -30,8 +30,8 @@ class AddSectionWidget extends StatelessWidget {
               homeManager.addSection(Section(type: 'List'));
             },
             style: ElevatedButton.styleFrom(
-              onPrimary: Colors.white,
-              primary: Colors.white.withAlpha(50),
+              disabledBackgroundColor: Colors.white,
+              backgroundColor: Colors.white.withAlpha(50),
             ),
             child: const Text('Adicionar grade'),
           ),

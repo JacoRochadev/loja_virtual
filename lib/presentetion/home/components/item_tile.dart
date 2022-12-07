@@ -73,6 +73,7 @@ class ItemTile extends StatelessWidget {
                                         as ProductModel;
                                 item.product = product?.id;
                               }
+                              // ignore: use_build_context_synchronously
                               Navigator.of(context).pop();
                             },
                             child: Text(
