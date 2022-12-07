@@ -14,6 +14,7 @@ class CheckoutScreen extends StatelessWidget {
       create: (_) => CheckoutManager(),
       update: (_, cartManager, checkoutManager) =>
           checkoutManager..updateCart(cartManager),
+      lazy: false,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Pagamento'),
