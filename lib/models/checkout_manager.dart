@@ -12,8 +12,12 @@ class CheckoutManager extends ChangeNotifier {
     this.cartManager = cartManager;
   }
 
-  void checkout() {
-    _decrementStock();
+  Future<void> checkout() async {
+    try {
+      await _decrementStock();
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 
   Future<int> _getOrderId() async {
@@ -35,8 +39,8 @@ class CheckoutManager extends ChangeNotifier {
     }
   }
 
-  void _decrementStock() {
-    firestore.runTransaction((transaction) async {
+  Future<void> _decrementStock() {
+    return firestore.runTransaction((transaction) async {
       final List<ProductModel> productsToUpdate = [];
       final List<ProductModel> productsWithoutStock = [];
 
