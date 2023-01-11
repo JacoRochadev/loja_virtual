@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:loja_virtual/models/order.dart';
 import 'package:loja_virtual/models/product.dart';
 
 import 'cart_manager.dart';
@@ -18,7 +19,15 @@ class CheckoutManager extends ChangeNotifier {
     } catch (e) {
       onStockFail();
       debugPrint(e.toString());
+      return;
     }
+    //TODO: Processar pagamento
+
+    final orderId = await _getOrderId();
+    final order = Order.fromCartManager(cartManager);
+    order.orderId = orderId.toString();
+
+    await order.save();
   }
 
   Future<int> _getOrderId() async {
