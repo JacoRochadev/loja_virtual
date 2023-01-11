@@ -175,4 +175,14 @@ class CartManager extends ChangeNotifier {
     deliveryPrice = base + distance * km;
     return true;
   }
+
+  void clear() {
+    for (final cartProduct in items) {
+      user.cartReference.doc(cartProduct.id).delete();
+    }
+    items.clear();
+    productsPrice = 0.0;
+    deliveryPrice = null;
+    notifyListeners();
+  }
 }

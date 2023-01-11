@@ -7,27 +7,37 @@ import 'cart_manager.dart';
 
 class CheckoutManager extends ChangeNotifier {
   CartManager cartManager;
+  bool _loading = false;
+  bool get loading => _loading;
+  set loading(bool value) {
+    _loading = value;
+    notifyListeners();
+  }
+
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   void updateCart(CartManager cartManager) {
     this.cartManager = cartManager;
   }
 
-  Future<void> checkout({Function onStockFail}) async {
+  Future<void> checkout({Function onStockFail, Function onSuccess}) async {
+    loading = true;
     try {
       await _decrementStock();
     } catch (e) {
       onStockFail();
-      debugPrint(e.toString());
+      loading = false;
       return;
     }
     //TODO: Processar pagamento
-
     final orderId = await _getOrderId();
     final order = Order.fromCartManager(cartManager);
     order.orderId = orderId.toString();
-
     await order.save();
+    cartManager.clear();
+
+    onSuccess();
+    loading = false;
   }
 
   Future<int> _getOrderId() async {
