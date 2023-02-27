@@ -21,7 +21,7 @@ class DrawerHeaderCustomComponent extends StatelessWidget {
             children: [
               Text(
                 'Loja do\nJacó',
-                style: Theme.of(context).textTheme.headline4.copyWith(
+                style: Theme.of(context).textTheme.headlineMedium.copyWith(
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
@@ -30,7 +30,7 @@ class DrawerHeaderCustomComponent extends StatelessWidget {
                 'Olá, ${userManager.userModel?.name ?? ''}',
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
-                style: Theme.of(context).textTheme.headline6.copyWith(
+                style: Theme.of(context).textTheme.titleLarge.copyWith(
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
@@ -46,7 +46,7 @@ class DrawerHeaderCustomComponent extends StatelessWidget {
                 },
                 child: Text(
                   userManager.isLoggedIn ? 'Sair' : 'Entre ou cadastre-se >',
-                  style: Theme.of(context).textTheme.subtitle1.copyWith(
+                  style: Theme.of(context).textTheme.titleMedium.copyWith(
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).primaryColor,
                       ),

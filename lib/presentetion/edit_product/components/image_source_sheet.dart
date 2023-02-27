@@ -53,7 +53,7 @@ class ImageSourceSheet extends StatelessWidget {
                   },
                   child: Text(
                     'Câmera',
-                    style: Theme.of(context).textTheme.subtitle1.copyWith(
+                    style: Theme.of(context).textTheme.titleMedium.copyWith(
                           color: Colors.black,
                         ),
                   ),
@@ -70,7 +70,7 @@ class ImageSourceSheet extends StatelessWidget {
                   },
                   child: Text(
                     'Galeria',
-                    style: Theme.of(context).textTheme.subtitle1.copyWith(
+                    style: Theme.of(context).textTheme.titleMedium.copyWith(
                           color: Colors.black,
                         ),
                   ),

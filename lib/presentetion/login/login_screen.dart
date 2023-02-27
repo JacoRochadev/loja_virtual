@@ -27,7 +27,7 @@ class LoginScreen extends StatelessWidget {
             },
             child: Text(
               'CRIAR CONTA',
-              style: Theme.of(context).textTheme.bodyText1.copyWith(
+              style: Theme.of(context).textTheme.bodyMedium.copyWith(
                     color: Colors.white,
                   ),
             ),
@@ -84,9 +84,10 @@ class LoginScreen extends StatelessWidget {
                         ),
                         child: Text(
                           'Esqueci minha senha',
-                          style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                color: Colors.black,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.bodyMedium.copyWith(
+                                    color: Colors.black,
+                                  ),
                         ),
                       ),
                     ),
@@ -133,7 +134,7 @@ class LoginScreen extends StatelessWidget {
                                 'Entrar',
                                 style: Theme.of(context)
                                     .textTheme
-                                    .subtitle1
+                                    .titleMedium
                                     .copyWith(
                                       color: Colors.white,
                                     ),

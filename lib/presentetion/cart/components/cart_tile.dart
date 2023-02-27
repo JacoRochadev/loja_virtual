@@ -32,14 +32,14 @@ class CartTile extends StatelessWidget {
                     children: [
                       Text(
                         cartProduct.product.name,
-                        style: Theme.of(context).textTheme.subtitle1.copyWith(
+                        style: Theme.of(context).textTheme.titleMedium.copyWith(
                               fontWeight: FontWeight.w500,
                             ),
                       ),
                       const SizedBox(height: 8),
                       Text(
                         'Tamanho: ${cartProduct.size}',
-                        style: Theme.of(context).textTheme.bodyText2.copyWith(
+                        style: Theme.of(context).textTheme.bodyMedium.copyWith(
                               fontWeight: FontWeight.w300,
                             ),
                       ),
@@ -51,7 +51,7 @@ class CartTile extends StatelessWidget {
                               'R\$ ${cartProduct.unitPrice.toStringAsFixed(2)}',
                               style: Theme.of(context)
                                   .textTheme
-                                  .subtitle1
+                                  .titleMedium
                                   .copyWith(
                                     color: Theme.of(context).primaryColor,
                                     fontWeight: FontWeight.bold,
@@ -62,7 +62,7 @@ class CartTile extends StatelessWidget {
                               'Sem estoque suficiente',
                               style: Theme.of(context)
                                   .textTheme
-                                  .subtitle1
+                                  .titleMedium
                                   .copyWith(
                                     color: Colors.red,
                                     fontWeight: FontWeight.bold,
@@ -86,7 +86,7 @@ class CartTile extends StatelessWidget {
                       ),
                       Text(
                         '${cartProduct.quantity}',
-                        style: Theme.of(context).textTheme.headline6.copyWith(
+                        style: Theme.of(context).textTheme.titleLarge.copyWith(
                               color: Theme.of(context).primaryColor,
                               fontWeight: FontWeight.bold,
                             ),

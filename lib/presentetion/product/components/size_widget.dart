@@ -41,7 +41,7 @@ class SizeWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
               child: Text(
                 size.name ?? '',
-                style: Theme.of(context).textTheme.subtitle1.copyWith(
+                style: Theme.of(context).textTheme.titleMedium.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.w500,
                     ),
@@ -51,7 +51,7 @@ class SizeWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
                 'R\$ ${size.price?.toStringAsFixed(2)}',
-                style: Theme.of(context).textTheme.subtitle1.copyWith(
+                style: Theme.of(context).textTheme.titleMedium.copyWith(
                       color: colores,
                       fontWeight: FontWeight.w500,
                     ),

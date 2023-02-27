@@ -29,7 +29,7 @@ class PriceCard extends StatelessWidget {
           children: <Widget>[
             Text(
               'Resumo do Pedido',
-              style: Theme.of(context).textTheme.subtitle1.copyWith(
+              style: Theme.of(context).textTheme.titleMedium.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
             ),
@@ -60,13 +60,13 @@ class PriceCard extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'Total',
-                  style: Theme.of(context).textTheme.subtitle1.copyWith(
+                  style: Theme.of(context).textTheme.titleMedium.copyWith(
                         fontWeight: FontWeight.w500,
                       ),
                 ),
                 Text(
                   'R\$ ${totalPrice.toStringAsFixed(2)}',
-                  style: Theme.of(context).textTheme.subtitle1.copyWith(
+                  style: Theme.of(context).textTheme.titleMedium.copyWith(
                         color: Theme.of(context).primaryColor,
                       ),
                 ),

@@ -63,7 +63,7 @@ class CepInputField extends StatelessWidget {
           Expanded(
             child: Text(
               'CEP: ${adress.zip}',
-              style: Theme.of(context).textTheme.subtitle2.copyWith(
+              style: Theme.of(context).textTheme.titleSmall.copyWith(
                     fontWeight: FontWeight.w600,
                     color: Theme.of(context).primaryColor,
                   ),

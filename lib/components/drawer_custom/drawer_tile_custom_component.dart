@@ -34,7 +34,7 @@ class DrawerTileCustomComponent extends StatelessWidget {
             ),
             Text(
               title,
-              style: Theme.of(context).textTheme.bodyText1.copyWith(
+              style: Theme.of(context).textTheme.bodyLarge.copyWith(
                     color: curPage == page ? primaryColor : Colors.grey[700],
                   ),
             ),

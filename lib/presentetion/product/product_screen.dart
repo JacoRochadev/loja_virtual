@@ -73,7 +73,7 @@ class ProductScreen extends StatelessWidget {
                 children: [
                   Text(
                     product.name ?? '',
-                    style: Theme.of(context).textTheme.headline6.copyWith(
+                    style: Theme.of(context).textTheme.titleLarge.copyWith(
                           color: Colors.black,
                           fontWeight: FontWeight.w600,
                         ),
@@ -81,14 +81,14 @@ class ProductScreen extends StatelessWidget {
                   const SizedBox(height: 8),
                   Text(
                     'A partir de',
-                    style: Theme.of(context).textTheme.caption.copyWith(
+                    style: Theme.of(context).textTheme.bodySmall.copyWith(
                           color: Colors.grey[600],
                         ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     'R\$ ${product.basePrice.toStringAsFixed(2)}',
-                    style: Theme.of(context).textTheme.headline6.copyWith(
+                    style: Theme.of(context).textTheme.titleLarge.copyWith(
                           color: primaryColor,
                           fontWeight: FontWeight.bold,
                         ),
@@ -97,7 +97,7 @@ class ProductScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 16, bottom: 8),
                     child: Text(
                       'Descrição',
-                      style: Theme.of(context).textTheme.subtitle1.copyWith(
+                      style: Theme.of(context).textTheme.titleMedium.copyWith(
                             color: Colors.black,
                             fontWeight: FontWeight.w500,
                           ),
@@ -105,7 +105,7 @@ class ProductScreen extends StatelessWidget {
                   ),
                   Text(
                     product.description,
-                    style: Theme.of(context).textTheme.subtitle1.copyWith(
+                    style: Theme.of(context).textTheme.titleMedium.copyWith(
                           color: Colors.black,
                         ),
                   ),
@@ -113,7 +113,7 @@ class ProductScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 16, bottom: 8),
                     child: Text(
                       'Tamanhos',
-                      style: Theme.of(context).textTheme.subtitle1.copyWith(
+                      style: Theme.of(context).textTheme.titleMedium.copyWith(
                             color: Colors.black,
                             fontWeight: FontWeight.w500,
                           ),
@@ -154,10 +154,12 @@ class ProductScreen extends StatelessWidget {
                             userManager.isLoggedIn
                                 ? 'Adicionar ao Carrinho'
                                 : 'Entre para Comprar',
-                            style:
-                                Theme.of(context).textTheme.subtitle1.copyWith(
-                                      color: Colors.white,
-                                    ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                .copyWith(
+                                  color: Colors.white,
+                                ),
                           ),
                         ),
                       );

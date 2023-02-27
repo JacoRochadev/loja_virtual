@@ -36,7 +36,7 @@ class ProductListTileCustomComponent extends StatelessWidget {
                   children: [
                     Text(
                       product.name ?? '',
-                      style: Theme.of(context).textTheme.subtitle1.copyWith(
+                      style: Theme.of(context).textTheme.titleMedium.copyWith(
                             fontWeight: FontWeight.w800,
                           ),
                     ),

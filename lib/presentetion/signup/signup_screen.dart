@@ -154,7 +154,7 @@ class SignUpScreen extends StatelessWidget {
                                 'Criar conta',
                                 style: Theme.of(context)
                                     .textTheme
-                                    .subtitle1
+                                    .titleMedium
                                     .copyWith(
                                       color: Colors.white,
                                     ),

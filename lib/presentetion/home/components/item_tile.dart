@@ -55,11 +55,13 @@ class ItemTile extends StatelessWidget {
                           },
                           child: Text(
                             'Excluir',
-                            style:
-                                Theme.of(context).textTheme.subtitle1.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.red,
-                                    ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                .copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.red,
+                                ),
                           ),
                         ),
                         TextButton(
@@ -80,7 +82,7 @@ class ItemTile extends StatelessWidget {
                               product != null ? 'Desvincular' : 'Vincular',
                               style: Theme.of(context)
                                   .textTheme
-                                  .subtitle1
+                                  .titleMedium
                                   .copyWith(
                                     fontWeight: FontWeight.w600,
                                     color: Theme.of(context).primaryColor,

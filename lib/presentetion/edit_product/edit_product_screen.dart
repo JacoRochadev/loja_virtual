@@ -47,7 +47,7 @@ class EditProductScreen extends StatelessWidget {
                           fontSize: 16,
                         ),
                       ),
-                      style: Theme.of(context).textTheme.headline6.copyWith(
+                      style: Theme.of(context).textTheme.titleLarge.copyWith(
                             color: Colors.black,
                             fontWeight: FontWeight.w600,
                           ),
@@ -96,7 +96,7 @@ class EditProductScreen extends StatelessWidget {
                           fontSize: 16,
                         ),
                       ),
-                      style: Theme.of(context).textTheme.subtitle1.copyWith(
+                      style: Theme.of(context).textTheme.titleMedium.copyWith(
                             color: Colors.black,
                           ),
                       validator: (description) {

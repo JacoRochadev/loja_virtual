@@ -25,7 +25,7 @@ class SectionHeader extends StatelessWidget {
                     isDense: true,
                     border: InputBorder.none,
                   ),
-                  style: Theme.of(context).textTheme.subtitle1.copyWith(
+                  style: Theme.of(context).textTheme.titleMedium.copyWith(
                         fontWeight: FontWeight.w800,
                         color: Colors.white,
                       ),
@@ -58,7 +58,7 @@ class SectionHeader extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 8),
         child: Text(
           section.name ?? 'Sem nome',
-          style: Theme.of(context).textTheme.subtitle1.copyWith(
+          style: Theme.of(context).textTheme.titleMedium.copyWith(
                 fontWeight: FontWeight.w800,
                 color: Colors.white,
               ),
