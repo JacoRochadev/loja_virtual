@@ -31,7 +31,7 @@ class OrdersScreen extends StatelessWidget {
             itemCount: ordersManager.orders.length,
             itemBuilder: (_, index) {
               return OrderTile(
-                order: ordersManager.orders[index],
+                order: ordersManager.orders.reversed.toList()[index],
               );
             },
           );

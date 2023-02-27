@@ -12,8 +12,10 @@ class OrderTile extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: ExpansionTile(
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   order.formattedId,
@@ -24,9 +26,10 @@ class OrderTile extends StatelessWidget {
                 Text(
                   'R\$ ${order.price.toStringAsFixed(2)}',
                   style: const TextStyle(
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                      fontSize: 14),
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
+                    fontSize: 14,
+                  ),
                 ),
               ],
             ),
