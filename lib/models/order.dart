@@ -13,7 +13,7 @@ class Order {
 
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  Future<void> save() {
+  Future<void> save() async {
     firestore.collection('orders').doc(orderId).set({
       'items': items.map((e) => e.toOrderItemMap()).toList(),
       'price': price,
