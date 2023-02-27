@@ -40,6 +40,8 @@ class Order {
   Adress adress;
   Timestamp date;
 
+  String get formattedId => '#${orderId.padLeft(6, '0')}';
+
   @override
   String toString() {
     return 'Order{items: $items, price: $price, orderId: $orderId, userId: $userId, adress: $adress, date: $date}';
