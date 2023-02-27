@@ -19,7 +19,7 @@ class Order {
     price = document['price'] as num;
     userId = document['userId'] as String;
     adress = Adress.fromMap(document['adress'] as Map<String, dynamic>);
-    date = document['date'] as Timestamp;
+    //date = document['date'] as Timestamp;
   }
 
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -41,9 +41,4 @@ class Order {
   Timestamp date;
 
   String get formattedId => '#${orderId.padLeft(6, '0')}';
-
-  @override
-  String toString() {
-    return 'Order{items: $items, price: $price, orderId: $orderId, userId: $userId, adress: $adress, date: $date}';
-  }
 }
