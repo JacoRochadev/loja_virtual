@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:loja_virtual/models/order.dart';
 
+import 'order_product_tile.dart';
+
 class OrderTile extends StatelessWidget {
   final Order order;
 
@@ -42,6 +44,15 @@ class OrderTile extends StatelessWidget {
             ),
           ],
         ),
+        children: [
+          Column(
+            children: order.items.map((e) {
+              return OrderProductTile(
+                cartProduct: e,
+              );
+            }).toList(),
+          ),
+        ],
       ),
     );
   }
