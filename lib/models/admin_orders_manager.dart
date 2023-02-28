@@ -7,13 +7,16 @@ import 'order.dart';
 class AdminOrdersManager extends ChangeNotifier {
   UserModel user;
   UserModel userFilter;
+  List<Status> statusFilter = [Status.preparing];
   final List<Order> _orders = [];
+
   List<Order> get filteredOrders {
     List<Order> output = _orders.reversed.toList();
     if (userFilter != null) {
       output = output.where((o) => o.userId == userFilter.id).toList();
     }
-    return output;
+
+    return output.where((o) => statusFilter.contains(o.status)).toList();
   }
 
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -52,6 +55,15 @@ class AdminOrdersManager extends ChangeNotifier {
 
   void setUserFilter(UserModel user) {
     userFilter = user;
+    notifyListeners();
+  }
+
+  void setStatusFilter({Status status, bool enabled}) {
+    if (enabled) {
+      statusFilter.add(status);
+    } else {
+      statusFilter.remove(status);
+    }
     notifyListeners();
   }
 
