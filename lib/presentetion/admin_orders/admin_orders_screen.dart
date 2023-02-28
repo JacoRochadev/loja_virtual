@@ -14,7 +14,7 @@ class AdminOrdersScreen extends StatelessWidget {
     return Scaffold(
       drawer: const DrawerCustomComponent(),
       appBar: AppBar(
-        title: const Text('Meus Pedidos'),
+        title: const Text('Todos os Pedidos'),
         centerTitle: true,
       ),
       body: Consumer<AdminOrdersManager>(
@@ -30,6 +30,7 @@ class AdminOrdersScreen extends StatelessWidget {
             itemBuilder: (_, index) {
               return OrderTile(
                 order: ordersManager.orders.reversed.toList()[index],
+                showControls: true,
               );
             },
           );

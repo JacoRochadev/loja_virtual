@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:loja_virtual/models/order.dart';
 
-import '../presentetion/orders/components/order_product_tile.dart';
+import 'order_product_tile.dart';
 
 class OrderTile extends StatelessWidget {
   final Order order;
+  final bool showControls;
 
-  const OrderTile({Key key, this.order}) : super(key: key);
+  const OrderTile({Key key, this.order, this.showControls = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
