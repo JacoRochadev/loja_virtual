@@ -28,6 +28,10 @@ class Order {
 
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
+  void updateFromDocument(DocumentSnapshot document) {
+    status = Status.values[document['status'] as int];
+  }
+
   Future<void> save() async {
     firestore.collection('orders').doc(orderId).set({
       'items': items.map((e) => e.toOrderItemMap()).toList(),
@@ -64,5 +68,37 @@ class Order {
       default:
         return '';
     }
+  }
+
+  Function get back {
+    return status.index >= Status.transporting.index
+        ? () {
+            status = Status.values[status.index - 1];
+            firestore
+                .collection('orders')
+                .doc(orderId)
+                .update({'status': status.index});
+          }
+        : null;
+  }
+
+  Function get advance {
+    return status.index <= Status.transporting.index
+        ? () {
+            status = Status.values[status.index + 1];
+            firestore
+                .collection('orders')
+                .doc(orderId)
+                .update({'status': status.index});
+          }
+        : null;
+  }
+
+  void cancel() {
+    status = Status.canceled;
+    firestore
+        .collection('orders')
+        .doc(orderId)
+        .update({'status': status.index});
   }
 }

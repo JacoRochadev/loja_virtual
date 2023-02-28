@@ -56,6 +56,32 @@ class OrderTile extends StatelessWidget {
               );
             }).toList(),
           ),
+          if (showControls && order.status != Status.canceled)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                TextButton(
+                  onPressed: order.cancel,
+                  child: const Text('Cancelar',
+                      style: TextStyle(color: Colors.red)),
+                ),
+                TextButton(
+                  onPressed: order.back,
+                  child: Text('Regredir',
+                      style: TextStyle(color: Colors.grey[850])),
+                ),
+                TextButton(
+                  onPressed: order.advance,
+                  child: Text('Avançar',
+                      style: TextStyle(color: Colors.grey[850])),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text('Endereço',
+                      style: TextStyle(color: Theme.of(context).primaryColor)),
+                ),
+              ],
+            ),
         ],
       ),
     );
