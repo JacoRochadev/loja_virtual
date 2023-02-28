@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loja_virtual/components/drawer_custom/drawer_custom_component.dart';
 import 'package:loja_virtual/components/empty_card.dart';
 import 'package:loja_virtual/components/login_card.dart';
 import 'package:loja_virtual/models/orders_manager.dart';
@@ -12,6 +13,7 @@ class OrdersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const DrawerCustomComponent(),
       appBar: AppBar(
         title: const Text('Meus Pedidos'),
         centerTitle: true,
