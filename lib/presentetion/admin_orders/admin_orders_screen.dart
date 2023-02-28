@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:loja_virtual/components/drawer_custom/drawer_custom_component.dart';
-import 'package:loja_virtual/components/empty_card.dart';
-import 'package:loja_virtual/components/login_card.dart';
-import 'package:loja_virtual/models/orders_manager.dart';
+import 'package:loja_virtual/models/admin_orders_manager.dart';
 import 'package:provider/provider.dart';
 
+import '../../components/drawer_custom/drawer_custom_component.dart';
+import '../../components/empty_card.dart';
 import '../../components/order_tile.dart';
 
-class OrdersScreen extends StatelessWidget {
-  const OrdersScreen({Key key}) : super(key: key);
+class AdminOrdersScreen extends StatelessWidget {
+  const AdminOrdersScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +17,11 @@ class OrdersScreen extends StatelessWidget {
         title: const Text('Meus Pedidos'),
         centerTitle: true,
       ),
-      body: Consumer<OrdersManager>(
+      body: Consumer<AdminOrdersManager>(
         builder: (_, ordersManager, __) {
-          if (ordersManager.user == null) {
-            return const LoginCard();
-          }
           if (ordersManager.orders.isEmpty) {
             return const EmptyCard(
-              title: 'Nenhuma compra encontrada!',
+              title: 'Nenhuma venda realizada!',
               iconData: Icons.border_clear,
             );
           }
