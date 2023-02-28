@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loja_virtual/models/page_manager.dart';
 import 'package:loja_virtual/models/user_manager.dart';
+import 'package:loja_virtual/presentetion/admin_orders/admin_orders_screen.dart';
 import 'package:loja_virtual/presentetion/admin_users/admin_users_screen.dart';
 import 'package:loja_virtual/presentetion/home/home_screen.dart';
 import 'package:loja_virtual/presentetion/orders/orders_screen.dart';
@@ -41,6 +42,7 @@ class _BaseScreenState extends State<BaseScreen> {
               ),
               if (userManager.adminEnabled) ...[
                 const AdminUserScreen(),
+                const AdminOrdersScreen(),
                 Scaffold(
                   drawer: const DrawerCustomComponent(),
                   appBar: AppBar(
