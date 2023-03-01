@@ -56,7 +56,16 @@ class ProductListTileCustomComponent extends StatelessWidget {
                           fontSize: 15,
                           fontWeight: FontWeight.w800,
                           color: Theme.of(context).primaryColor),
-                    )
+                    ),
+                    if (!product.hasStock)
+                      const Padding(
+                        padding: EdgeInsets.only(top: 4),
+                        child: Text('Sem estoque',
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontSize: 12,
+                            )),
+                      ),
                   ],
                 ),
               )
