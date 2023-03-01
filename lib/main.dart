@@ -83,7 +83,6 @@ class MyApp extends StatelessWidget {
           appBarTheme: const AppBarTheme(
               elevation: 0, color: Color.fromARGB(255, 4, 125, 141)),
         ),
-        initialRoute: '/base',
         onGenerateRoute: (settings) {
           switch (settings.name) {
             case '/login':
@@ -127,7 +126,7 @@ class MyApp extends StatelessWidget {
                 builder: (_) => const CheckoutScreen(),
                 settings: settings,
               );
-            case '/base':
+            case '/':
             default:
               return MaterialPageRoute(
                   builder: (_) => const BaseScreen(), settings: settings);
