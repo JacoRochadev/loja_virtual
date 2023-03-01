@@ -42,7 +42,7 @@ class _BaseScreenState extends State<BaseScreen> {
               ),
               if (userManager.adminEnabled) ...[
                 const AdminUserScreen(),
-                AdminOrdersScreen(),
+                const AdminOrdersScreen(),
                 Scaffold(
                   drawer: const DrawerCustomComponent(),
                   appBar: AppBar(
