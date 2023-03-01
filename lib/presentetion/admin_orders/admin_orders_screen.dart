@@ -9,9 +9,15 @@ import '../../components/drawer_custom/drawer_custom_component.dart';
 import '../../components/empty_card.dart';
 import '../../components/order_tile.dart';
 
-class AdminOrdersScreen extends StatelessWidget {
+class AdminOrdersScreen extends StatefulWidget {
+  const AdminOrdersScreen({Key key}) : super(key: key);
+
+  @override
+  State<AdminOrdersScreen> createState() => _AdminOrdersScreenState();
+}
+
+class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
   final PanelController _pc = PanelController();
-  AdminOrdersScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
