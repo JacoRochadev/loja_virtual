@@ -162,6 +162,7 @@ class CartManager extends ChangeNotifier {
     final longStore = doc['long'] as double;
     final maxkm = doc['maxkm'] as num;
 
+    // ignore: unused_local_variable
     final base = doc['base'] as num;
     final km = doc['km'] as num;
 
