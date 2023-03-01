@@ -9,7 +9,12 @@ import 'package:uuid/uuid.dart';
 class ProductModel extends ChangeNotifier {
   //ProductModel({this.name, this.description, this.images});
   ProductModel(
-      {this.id, this.name, this.description, this.images, this.sizes}) {
+      {this.id,
+      this.name,
+      this.description,
+      this.images,
+      this.sizes,
+      this.deleted = false}) {
     images = images ?? [];
     sizes = sizes ?? [];
   }
@@ -19,6 +24,13 @@ class ProductModel extends ChangeNotifier {
     name = document['name'] as String;
     description = document['description'] as String;
     images = List<String>.from(document['images'] as List<dynamic>);
+
+    if (document.data().toString().contains('deleted')) {
+      deleted = document['deleted'] as bool;
+    } else {
+      deleted = false;
+    }
+
     if (document.data().toString().contains('sizes')) {
       sizes = (document['sizes'] as List<dynamic>)
           .map((s) => ItemSize.fromMap(s as Map<String, dynamic>))
@@ -40,6 +52,7 @@ class ProductModel extends ChangeNotifier {
   List<String> images;
   List<ItemSize> sizes;
   List<dynamic> newImages;
+  bool deleted;
 
   bool _loading = false;
   bool get loading => _loading;
@@ -89,7 +102,8 @@ class ProductModel extends ChangeNotifier {
       ..name = name
       ..description = description
       ..images = List.from(images)
-      ..sizes = sizes.map((size) => size.clone()).toList();
+      ..sizes = sizes.map((size) => size.clone()).toList()
+      ..deleted = deleted;
   }
 
   List<Map<String, dynamic>> exportSizeList() {
@@ -102,6 +116,7 @@ class ProductModel extends ChangeNotifier {
       'name': name,
       'description': description,
       'sizes': exportSizeList(),
+      'deleted': deleted,
     };
 
     if (id == null) {
@@ -140,5 +155,9 @@ class ProductModel extends ChangeNotifier {
     images = updateImages;
 
     loading = false;
+  }
+
+  void delete() {
+    firestoreRef.update({'deleted': true});
   }
 }
