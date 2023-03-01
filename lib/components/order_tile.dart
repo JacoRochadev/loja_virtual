@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loja_virtual/components/cancel_order_dialog.dart';
 import 'package:loja_virtual/models/order.dart';
 
 import 'order_product_tile.dart';
@@ -61,7 +62,12 @@ class OrderTile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 TextButton(
-                  onPressed: order.cancel,
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (_) => CancelOrderDialog(order: order),
+                    );
+                  },
                   child: const Text('Cancelar',
                       style: TextStyle(color: Colors.red)),
                 ),
