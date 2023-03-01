@@ -7,14 +7,14 @@ import 'package:loja_virtual/models/item_size.dart';
 import 'package:uuid/uuid.dart';
 
 class ProductModel extends ChangeNotifier {
-  //ProductModel({this.name, this.description, this.images});
   ProductModel(
       {this.id,
       this.name,
       this.description,
       this.images,
       this.sizes,
-      this.deleted = false}) {
+      this.deleted}) {
+    deleted = deleted ?? false;
     images = images ?? [];
     sizes = sizes ?? [];
   }
