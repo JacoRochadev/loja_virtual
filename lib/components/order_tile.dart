@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:loja_virtual/components/cancel_order_dialog.dart';
+import 'package:loja_virtual/components/export_address_dialog.dart';
 import 'package:loja_virtual/models/order.dart';
 
 import 'order_product_tile.dart';
@@ -82,7 +83,13 @@ class OrderTile extends StatelessWidget {
                       style: TextStyle(color: Colors.grey[850])),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (_) =>
+                          ExportAddressDialog(address: order.adress),
+                    );
+                  },
                   child: Text('Endereço',
                       style: TextStyle(color: Theme.of(context).primaryColor)),
                 ),
