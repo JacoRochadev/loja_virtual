@@ -7,7 +7,9 @@ import '../../models/checkout_manager.dart';
 import 'components/credit_card_widget.dart';
 
 class CheckoutScreen extends StatelessWidget {
-  const CheckoutScreen({Key key}) : super(key: key);
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  CheckoutScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +19,7 @@ class CheckoutScreen extends StatelessWidget {
           checkoutManager..updateCart(cartManager),
       lazy: false,
       child: Scaffold(
+          key: scaffoldKey,
           appBar: AppBar(
             title: const Text('Pagamento'),
             centerTitle: true,
@@ -43,33 +46,38 @@ class CheckoutScreen extends StatelessWidget {
                   ),
                 );
               }
-              return ListView(
-                children: [
-                  CreditCardWidget(),
-                  PriceCard(
-                    buttonText: 'Finalizar Pedido',
-                    onPressed: () {
-                      checkoutManager.checkout(
-                        onStockFail: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Falha ao realizar o pedido'),
-                              backgroundColor: Colors.red,
-                            ),
+              return Form(
+                key: formKey,
+                child: ListView(
+                  children: [
+                    CreditCardWidget(),
+                    PriceCard(
+                      buttonText: 'Finalizar Pedido',
+                      onPressed: () {
+                        if (formKey.currentState.validate()) {
+                          return checkoutManager.checkout(
+                            onStockFail: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Falha ao realizar o pedido'),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
+                              Navigator.of(context).popUntil(
+                                  (route) => route.settings.name == '/cart');
+                            },
+                            onSuccess: (order) {
+                              Navigator.of(context).popUntil(
+                                  (route) => route.settings.name == '/');
+                              Navigator.of(context)
+                                  .pushNamed('/confirmation', arguments: order);
+                            },
                           );
-                          Navigator.of(context).popUntil(
-                              (route) => route.settings.name == '/cart');
-                        },
-                        onSuccess: (order) {
-                          Navigator.of(context)
-                              .popUntil((route) => route.settings.name == '/');
-                          Navigator.of(context)
-                              .pushNamed('/confirmation', arguments: order);
-                        },
-                      );
-                    },
-                  )
-                ],
+                        }
+                      },
+                    )
+                  ],
+                ),
               );
             },
           )),

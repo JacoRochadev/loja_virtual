@@ -49,6 +49,12 @@ class CardFront extends StatelessWidget {
                         FilteringTextInputFormatter.digitsOnly,
                         LengthLimitingTextInputFormatter(16),
                       ],
+                      validator: (number) {
+                        if (number.isEmpty || number.length != 16) {
+                          return 'Inválido';
+                        }
+                        return null;
+                      },
                     ),
                     CardTextField(
                       title: 'Validade',
@@ -58,12 +64,24 @@ class CardFront extends StatelessWidget {
                       inputFormatters: [
                         dateFormatter,
                       ],
+                      validator: (date) {
+                        if (date.isEmpty || date.length != 7) {
+                          return 'Inválido';
+                        }
+                        return null;
+                      },
                     ),
-                    const CardTextField(
+                    CardTextField(
                       title: 'Titular do Cartão',
                       bold: true,
                       hint: 'Jaco R Ferreira',
                       keyboardType: TextInputType.text,
+                      validator: (name) {
+                        if (name.isEmpty) {
+                          return 'Inválido';
+                        }
+                        return null;
+                      },
                     ),
                   ],
                 ))
