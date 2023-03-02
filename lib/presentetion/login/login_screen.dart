@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:loja_virtual/models/user_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:loja_virtual/models/user.dart';
-
 import '../../helpers/validators.dart';
 
 class LoginScreen extends StatelessWidget {
