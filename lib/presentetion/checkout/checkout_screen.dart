@@ -4,6 +4,7 @@ import 'package:loja_virtual/models/cart_manager.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/checkout_manager.dart';
+import 'components/credit_card_widget.dart';
 
 class CheckoutScreen extends StatelessWidget {
   const CheckoutScreen({Key key}) : super(key: key);
@@ -42,31 +43,34 @@ class CheckoutScreen extends StatelessWidget {
                   ),
                 );
               }
-              return ListView(children: [
-                PriceCard(
-                  buttonText: 'Finalizar Pedido',
-                  onPressed: () {
-                    checkoutManager.checkout(
-                      onStockFail: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Falha ao realizar o pedido'),
-                            backgroundColor: Colors.red,
-                          ),
-                        );
-                        Navigator.of(context).popUntil(
-                            (route) => route.settings.name == '/cart');
-                      },
-                      onSuccess: (order) {
-                        Navigator.of(context)
-                            .popUntil((route) => route.settings.name == '/');
-                        Navigator.of(context)
-                            .pushNamed('/confirmation', arguments: order);
-                      },
-                    );
-                  },
-                )
-              ]);
+              return ListView(
+                children: [
+                  CreditCardWidget(),
+                  PriceCard(
+                    buttonText: 'Finalizar Pedido',
+                    onPressed: () {
+                      checkoutManager.checkout(
+                        onStockFail: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Falha ao realizar o pedido'),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                          Navigator.of(context).popUntil(
+                              (route) => route.settings.name == '/cart');
+                        },
+                        onSuccess: (order) {
+                          Navigator.of(context)
+                              .popUntil((route) => route.settings.name == '/');
+                          Navigator.of(context)
+                              .pushNamed('/confirmation', arguments: order);
+                        },
+                      );
+                    },
+                  )
+                ],
+              );
             },
           )),
     );
