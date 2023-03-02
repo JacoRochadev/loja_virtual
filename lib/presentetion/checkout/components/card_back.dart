@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:loja_virtual/presentetion/checkout/components/card_text_field.dart';
 
 class CardBack extends StatelessWidget {
-  const CardBack({Key key}) : super(key: key);
+  final FocusNode cvvFocus;
+  const CardBack({Key key, this.cvvFocus}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +14,47 @@ class CardBack extends StatelessWidget {
       color: const Color(0xFF134B52),
       child: SizedBox(
         height: 200,
-        child: Row(children: []),
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 16),
+              height: 50,
+              color: Colors.black,
+            ),
+            Row(
+              children: [
+                Expanded(
+                    flex: 70,
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 4, horizontal: 10),
+                      color: Colors.grey[500],
+                      child: CardTextField(
+                        bold: true,
+                        hint: 'CVV',
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          LengthLimitingTextInputFormatter(3),
+                        ],
+                        textAlign: TextAlign.end,
+                        focusNode: cvvFocus,
+                        validator: (cvv) {
+                          if (cvv.isEmpty || cvv.length != 3) {
+                            return 'Inválido';
+                          }
+                          return null;
+                        },
+                      ),
+                    )),
+                Expanded(
+                  flex: 30,
+                  child: Container(),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

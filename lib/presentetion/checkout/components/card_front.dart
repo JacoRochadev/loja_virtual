@@ -1,10 +1,21 @@
+import 'package:credit_card_type_detector/credit_card_type_detector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:loja_virtual/presentetion/checkout/components/card_text_field.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class CardFront extends StatelessWidget {
-  const CardFront({Key key}) : super(key: key);
+  final FocusNode numberFocus;
+  final FocusNode dateFocus;
+  final FocusNode nameFocus;
+  final VoidCallback finished;
+  const CardFront(
+      {Key key,
+      this.numberFocus,
+      this.dateFocus,
+      this.nameFocus,
+      this.finished})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +60,14 @@ class CardFront extends StatelessWidget {
                         FilteringTextInputFormatter.digitsOnly,
                         LengthLimitingTextInputFormatter(16),
                       ],
+                      onFieldSubmitted: (_) {
+                        dateFocus.requestFocus();
+                      },
+                      focusNode: numberFocus,
                       validator: (number) {
-                        if (number.isEmpty || number.length != 16) {
+                        if (number.isEmpty ||
+                            number.length != 16 ||
+                            detectCCType(number) == CreditCardType.unknown) {
                           return 'Inválido';
                         }
                         return null;
@@ -64,6 +81,10 @@ class CardFront extends StatelessWidget {
                       inputFormatters: [
                         dateFormatter,
                       ],
+                      focusNode: dateFocus,
+                      onFieldSubmitted: (_) {
+                        nameFocus.requestFocus();
+                      },
                       validator: (date) {
                         if (date.isEmpty || date.length != 7) {
                           return 'Inválido';
@@ -76,6 +97,10 @@ class CardFront extends StatelessWidget {
                       bold: true,
                       hint: 'Jaco R Ferreira',
                       keyboardType: TextInputType.text,
+                      onFieldSubmitted: (_) {
+                        finished();
+                      },
+                      focusNode: nameFocus,
                       validator: (name) {
                         if (name.isEmpty) {
                           return 'Inválido';

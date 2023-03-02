@@ -8,6 +8,10 @@ class CardTextField extends StatelessWidget {
   final TextInputType keyboardType;
   final List<TextInputFormatter> inputFormatters;
   final FormFieldValidator<String> validator;
+  final TextAlign textAlign;
+  final FocusNode focusNode;
+  final Function(String) onFieldSubmitted;
+  final TextInputAction textInputAction;
   const CardTextField(
       {Key key,
       this.title,
@@ -15,8 +19,14 @@ class CardTextField extends StatelessWidget {
       this.hint,
       this.keyboardType,
       this.inputFormatters,
-      this.validator})
-      : super(key: key);
+      this.validator,
+      this.textAlign = TextAlign.start,
+      this.focusNode,
+      this.onFieldSubmitted})
+      : textInputAction = onFieldSubmitted == null
+            ? TextInputAction.done
+            : TextInputAction.next,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +39,15 @@ class CardTextField extends StatelessWidget {
           children: [
             Row(
               children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 10,
-                    fontWeight: FontWeight.w400,
+                if (title != null)
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 10,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
-                ),
                 const SizedBox(width: 4),
                 if (state.hasError)
                   Text(
@@ -67,6 +78,10 @@ class CardTextField extends StatelessWidget {
               ),
               keyboardType: keyboardType,
               inputFormatters: inputFormatters,
+              textAlign: textAlign,
+              focusNode: focusNode,
+              onFieldSubmitted: onFieldSubmitted,
+              textInputAction: textInputAction,
               onChanged: (text) {
                 state.didChange(text);
               },
