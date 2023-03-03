@@ -1,3 +1,4 @@
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:loja_virtual/models/admin_users_manager.dart';
@@ -15,7 +16,6 @@ import 'package:loja_virtual/presentetion/login/login_screen.dart';
 import 'package:loja_virtual/presentetion/product/product_screen.dart';
 import 'package:loja_virtual/presentetion/select_product/select_product_screen.dart';
 import 'package:provider/provider.dart';
-
 import 'models/admin_orders_manager.dart';
 import 'models/product.dart';
 import 'models/product_manager.dart';
@@ -26,6 +26,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
+  final response =
+      await FirebaseFunctions.instance.httpsCallable('helloWorld').call();
+  print(response.data);
 }
 
 class MyApp extends StatelessWidget {

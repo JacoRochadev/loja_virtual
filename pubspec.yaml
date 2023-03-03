@@ -36,6 +36,7 @@ dependencies:
   flip_card: ^0.7.0
   mask_text_input_formatter: ^2.4.0
   credit_card_type_detector: ^2.0.0
+  cloud_functions: ^3.3.9
 
 dev_dependencies:
   flutter_test:
