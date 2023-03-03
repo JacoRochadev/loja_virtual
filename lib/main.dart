@@ -26,9 +26,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
-  final response =
-      await FirebaseFunctions.instance.httpsCallable('helloWorld').call();
-  print(response.data);
 }
 
 class MyApp extends StatelessWidget {
