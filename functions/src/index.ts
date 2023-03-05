@@ -1,10 +1,24 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 
+import { CieloConstructor, Cielo, TransactionCreditCardRequestModel, CaptureRequestModel, CancelTransactionRequestModel, EnumBrands } from 'cielo';
+
 admin.initializeApp(functions.config().firebase);
 
 // Start writing Firebase Functions
 // https://firebase.google.com/docs/functions/typescript
+
+const merchantid = functions.config().cielo.merchantid;
+const merchantkey = functions.config().cielo.merchantkey;
+
+const cieloParams: CieloConstructor = {
+  merchantId: merchantid,
+  merchantKey: merchantkey,
+  sandbox: true, 
+  debug: true 
+}
+
+const cielo = new Cielo(cieloParams);
 
 exports.helloWorld = functions.https.onCall((data, context) => {
   return {data: "Hello from Firebase!"};
