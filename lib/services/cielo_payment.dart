@@ -12,7 +12,7 @@ class CieloPayment {
     final Map<String, dynamic> dataSale = {
       'MerchantOrderId': orderId,
       'amount': (price * 100).toInt(),
-      'softDescriptor': 'Loja Virtual',
+      'softDescriptor': 'Loja jaco',
       'installments': 1,
       'creditCard': creditCard.toMap(),
       'cpf': user.cpf,

@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:loja_virtual/models/credit_card.dart';
-import 'package:loja_virtual/models/order.dart';
 import 'package:loja_virtual/models/product.dart';
 import 'package:loja_virtual/services/cielo_payment.dart';
 

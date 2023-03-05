@@ -68,7 +68,7 @@ exports.authorizeCreditCard = functions.https.onCall( async (data, context) => {
   }
 
   const saleData: TransactionCreditCardRequestModel = {
-    merchantOrderId: data.merchantOrderId,
+    merchantOrderId: data.MerchantOrderId,
     customer: {
       name: userData.name,
       email: userData.email,
@@ -90,8 +90,8 @@ exports.authorizeCreditCard = functions.https.onCall( async (data, context) => {
       country: 'BRA',
       amount: data.amount,
       installments: data.installments,
-      softDescriptor: data.softDescriptor,
-      type: data.type,
+      softDescriptor: data.softDescriptor.substring(0, 13),
+      type: data.paymentType,
       capture: false,
       creditCard: {
         cardNumber: data.creditCard.cardNumber,
