@@ -15,6 +15,7 @@ class CpfField extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.fromLTRB(16, 4, 16, 4),
         child: TextFormField(
+          initialValue: userManager.userModel.cpf,
           decoration: const InputDecoration(
             isDense: true,
             labelText: 'CPF',
