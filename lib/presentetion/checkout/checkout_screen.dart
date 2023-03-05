@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loja_virtual/components/price_card.dart';
 import 'package:loja_virtual/models/cart_manager.dart';
+import 'package:loja_virtual/presentetion/checkout/components/cpf_field.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/checkout_manager.dart';
@@ -51,10 +52,12 @@ class CheckoutScreen extends StatelessWidget {
                 child: ListView(
                   children: [
                     CreditCardWidget(),
+                    const CpfField(),
                     PriceCard(
                       buttonText: 'Finalizar Pedido',
                       onPressed: () {
                         if (formKey.currentState.validate()) {
+                          formKey.currentState.save();
                           return checkoutManager.checkout(
                             onStockFail: () {
                               ScaffoldMessenger.of(context).showSnackBar(
