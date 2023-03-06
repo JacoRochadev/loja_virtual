@@ -36,7 +36,7 @@ class CardBack extends StatelessWidget {
                         bold: true,
                         hint: 'CVV',
                         keyboardType: TextInputType.number,
-                        onSaved: creditCard.setCvvCode,
+                        onSaved: creditCard.setCVV,
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly,
                           LengthLimitingTextInputFormatter(3),

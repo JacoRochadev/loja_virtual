@@ -62,7 +62,7 @@ class CardFront extends StatelessWidget {
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(16),
                     ],
-                    onSaved: creditCard.setCardNumber,
+                    onSaved: creditCard.setNumber,
                     onFieldSubmitted: (_) {
                       dateFocus.requestFocus();
                     },
@@ -84,7 +84,7 @@ class CardFront extends StatelessWidget {
                     inputFormatters: [
                       dateFormatter,
                     ],
-                    onSaved: creditCard.setExpiryDate,
+                    onSaved: creditCard.setExpirationDate,
                     focusNode: dateFocus,
                     onFieldSubmitted: (_) {
                       nameFocus.requestFocus();
@@ -104,7 +104,7 @@ class CardFront extends StatelessWidget {
                     onFieldSubmitted: (_) {
                       finished();
                     },
-                    onSaved: creditCard.setCardHolderName,
+                    onSaved: creditCard.setHolder,
                     focusNode: nameFocus,
                     validator: (name) {
                       if (name.isEmpty) {
