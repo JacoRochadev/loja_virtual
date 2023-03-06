@@ -24,6 +24,7 @@ class Order {
     adress = Adress.fromMap(document['adress'] as Map<String, dynamic>);
     date = document['date'] as Timestamp;
     status = Status.values[document['status'] as int];
+    payId = document['payId'] as String;
   }
 
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -40,6 +41,7 @@ class Order {
       'adress': adress.toMap(),
       'status': status.index,
       'date': Timestamp.now(),
+      'payId': payId,
     });
   }
 
@@ -50,6 +52,7 @@ class Order {
   Adress adress;
   Timestamp date;
   Status status;
+  String payId;
 
   String get formattedId => '#${orderId.padLeft(6, '0')}';
 

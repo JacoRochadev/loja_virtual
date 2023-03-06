@@ -1,7 +1,7 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 
-import { CieloConstructor, Cielo, TransactionCreditCardRequestModel, EnumBrands} from 'cielo';
+import { CieloConstructor, Cielo, TransactionCreditCardRequestModel, EnumBrands, CaptureRequestModel} from 'cielo';
 
 //, CaptureRequestModel, CancelTransactionRequestModel, TransactionCreditCardResponseModel
 
@@ -22,7 +22,7 @@ const cieloParams: CieloConstructor = {
 
 const cielo = new Cielo(cieloParams);
 
-export const authorizeCreditCard = functions.https.onCall(async (data, context) => {
+exports.authorizeCreditCard = functions.https.onCall(async (data, context) => {
     if(data === null){
         return {
             "success": false,
@@ -177,11 +177,11 @@ export const authorizeCreditCard = functions.https.onCall(async (data, context) 
 
 });
 
-export const helloWorld = functions.https.onCall((data, context) => {
+exports.helloWorld = functions.https.onCall((data, context) => {
   return {data: "Hellow from Cloud Functions!!!"};
 });
 
-export const getUserData = functions.https.onCall( async (data, context) => {
+exports.getUserData = functions.https.onCall( async (data, context) => {
     if(!context.auth){
         return {
             "data": "Nenhum usuário logado"
@@ -199,7 +199,7 @@ export const getUserData = functions.https.onCall( async (data, context) => {
     };
 });
 
-export const addMessage = functions.https.onCall( async (data, context) => {
+exports.addMessage = functions.https.onCall( async (data, context) => {
     console.log(data);
 
     const snapshot = await admin.firestore().collection("messages").add(data);
@@ -207,7 +207,61 @@ export const addMessage = functions.https.onCall( async (data, context) => {
     return {"success": snapshot.id};
 });
 
-export const onNewOrder = functions.firestore.document("/orders/{orderId}").onCreate((snapshot, context) => {
+exports.onNewOrder = functions.firestore.document("/orders/{orderId}").onCreate((snapshot, context) => {
     const orderId = context.params.orderId;
     console.log(orderId);
+});
+
+exports.captureCreditCard = functions.https.onCall(async (data, context) => {
+    if(data === null){
+        return {
+            "success": false,
+            "error": {
+                "code": -1,
+                "message": "Dados não informados"
+            }
+        };
+    }
+
+    if(!context.auth){
+        return {
+            "success": false,
+            "error": {
+                "code": -1,
+                "message": "Nenhum usuário logado"
+            }
+        };
+    }
+
+    const captureParams: CaptureRequestModel = {
+        paymentId: data.payId,
+    }
+
+    try {
+        const capture = await cielo.creditCard.captureSaleTransaction(captureParams);
+        if(capture.status === 2){
+            return {
+                "success": true,
+            }
+        
+        }else{
+            return {
+                "success": false,
+                "status": capture.status,
+                "error": {
+                    "code": capture.returnCode,
+                    "message": capture.returnMessage
+                }
+            };
+        }
+    } catch (error) {
+        console.log("Error ", error);
+        return {
+            "success": false,
+            "error": {
+                "code": -1,
+                "message": error
+            }
+        }; 
+    }
 });
