@@ -63,6 +63,9 @@ class CheckoutScreen extends StatelessWidget {
                         if (formKey.currentState.validate()) {
                           formKey.currentState.save();
                           return checkoutManager.checkout(
+                            onPayFail: (e) {
+                              debugPrint('Falha ao realizar o pagamento: $e');
+                            },
                             creditCard: creditCard,
                             onStockFail: () {
                               ScaffoldMessenger.of(context).showSnackBar(
