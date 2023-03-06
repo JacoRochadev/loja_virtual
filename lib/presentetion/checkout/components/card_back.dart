@@ -33,6 +33,7 @@ class CardBack extends StatelessWidget {
                           vertical: 4, horizontal: 10),
                       color: Colors.grey[500],
                       child: CardTextField(
+                        initialValue: creditCard.securityCode,
                         bold: true,
                         hint: 'CVV',
                         keyboardType: TextInputType.number,

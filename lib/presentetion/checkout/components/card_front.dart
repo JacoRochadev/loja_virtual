@@ -54,6 +54,7 @@ class CardFront extends StatelessWidget {
                     ],
                   ),
                   CardTextField(
+                    initialValue: creditCard.number,
                     title: 'Número do Cartão',
                     bold: true,
                     hint: '0000.0000.0000.0000',
@@ -77,6 +78,7 @@ class CardFront extends StatelessWidget {
                     },
                   ),
                   CardTextField(
+                    initialValue: creditCard.expirationDate,
                     title: 'Validade',
                     bold: true,
                     hint: '00/0000',
@@ -97,6 +99,7 @@ class CardFront extends StatelessWidget {
                     },
                   ),
                   CardTextField(
+                    initialValue: creditCard.holder,
                     title: 'Titular do Cartão',
                     bold: true,
                     hint: 'Jaco R Ferreira',
