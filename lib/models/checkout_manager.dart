@@ -8,6 +8,7 @@ import 'cart_manager.dart';
 
 class CheckoutManager extends ChangeNotifier {
   CartManager cartManager;
+
   bool _loading = false;
   bool get loading => _loading;
   set loading(bool value) {
@@ -19,51 +20,51 @@ class CheckoutManager extends ChangeNotifier {
 
   final CieloPayment cieloPayment = CieloPayment();
 
+  // ignore: use_setters_to_change_properties
   void updateCart(CartManager cartManager) {
     this.cartManager = cartManager;
   }
 
   Future<void> checkout(
-      {CreditCard creditCard, onStockFail, Function onSuccess}) async {
+      {CreditCard creditCard, Function onStockFail, Function onSuccess}) async {
     loading = true;
+
     final orderId = await _getOrderId();
+
     cieloPayment.authorize(
       creditCard: creditCard,
       price: cartManager.totalPrice,
       orderId: orderId.toString(),
       user: cartManager.user,
     );
-    // try {
-    //   await _decrementStock();
-    // } catch (e) {
-    //   onStockFail();
-    //   loading = false;
-    //   return;
-    // }
 
-    // //TODO: Processar pagamento
+    /*try {
+      await _decrementStock();
+    } catch (e){
+      onStockFail(e);
+      loading = false;
+      return;
+    }
+    // CAPTURAR O PAGAMENTO
+    final order = Order.fromCartManager(cartManager);
+    order.orderId = orderId.toString();
+    await order.save();
+    cartManager.clear();*/
 
-    // final order = Order.fromCartManager(cartManager);
-    // order.orderId = orderId.toString();
-    // await order.save();
-    // cartManager.clear();
-
-    // onSuccess(order);
+    //onSuccess(order);
     loading = false;
   }
 
   Future<int> _getOrderId() async {
     final ref = firestore.doc('aux/ordercounter');
-    try {
-      final result = await firestore.runTransaction(
-        (tx) async {
-          final doc = await tx.get(ref);
-          final orderId = doc['current'] as int;
-          tx.update(ref, {'current': orderId + 1});
 
-          return {'orderId': orderId};
-        },
-      );
+    try {
+      final result = await firestore.runTransaction((tx) async {
+        final doc = await tx.get(ref);
+        final orderId = doc['current'] as int;
+        tx.update(ref, {'current': orderId + 1});
+        return {'orderId': orderId};
+      });
       return result['orderId'];
     } catch (e) {
       debugPrint(e.toString());
@@ -72,7 +73,11 @@ class CheckoutManager extends ChangeNotifier {
   }
 
   Future<void> _decrementStock() {
-    return firestore.runTransaction((transaction) async {
+    // 1. Ler todos os estoques 3xM
+    // 2. Decremento localmente os estoques 2xM
+    // 3. Salvar os estoques no firebase 2xM
+
+    return firestore.runTransaction((tx) async {
       final List<ProductModel> productsToUpdate = [];
       final List<ProductModel> productsWithoutStock = [];
 
@@ -83,15 +88,14 @@ class CheckoutManager extends ChangeNotifier {
           product =
               productsToUpdate.firstWhere((p) => p.id == cartProduct.productId);
         } else {
-          final doc = await transaction
-              .get(firestore.doc('products/${cartProduct.productId}'));
+          final doc =
+              await tx.get(firestore.doc('products/${cartProduct.productId}'));
           product = ProductModel.fromDocument(doc);
         }
 
         cartProduct.product = product;
 
         final size = product.findSize(cartProduct.size);
-
         if (size.stock - cartProduct.quantity < 0) {
           productsWithoutStock.add(product);
         } else {
@@ -106,7 +110,7 @@ class CheckoutManager extends ChangeNotifier {
       }
 
       for (final product in productsToUpdate) {
-        transaction.update(firestore.doc('products/${product.id}'),
+        tx.update(firestore.doc('products/${product.id}'),
             {'sizes': product.exportSizeList()});
       }
     });

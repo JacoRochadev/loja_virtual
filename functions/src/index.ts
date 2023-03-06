@@ -22,7 +22,7 @@ const cieloParams: CieloConstructor = {
 
 const cielo = new Cielo(cieloParams);
 
-exports.authorizeCreditCard = functions.https.onCall(async (data, context) => {
+export const authorizeCreditCard = functions.https.onCall(async (data, context) => {
     if(data === null){
         return {
             "success": false,

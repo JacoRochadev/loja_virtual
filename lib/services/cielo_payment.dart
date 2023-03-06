@@ -3,7 +3,8 @@ import 'package:loja_virtual/models/credit_card.dart';
 import 'package:loja_virtual/models/user.dart';
 
 class CieloPayment {
-  final functions = FirebaseFunctions.instance;
+  final FirebaseFunctions functions = FirebaseFunctions.instance;
+
   Future<void> authorize(
       {CreditCard creditCard,
       num price,
@@ -14,7 +15,7 @@ class CieloPayment {
       'amount': (price * 100).toInt(),
       'softDescriptor': 'Loja Daniel',
       'installments': 1,
-      'creditCard': creditCard.toMap(),
+      'creditCard': creditCard.toJson(),
       'cpf': user.cpf,
       'paymentType': 'CreditCard',
     };

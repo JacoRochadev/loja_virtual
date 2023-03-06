@@ -19,7 +19,7 @@ class CreditCard {
         .last;
   }
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
       'cardNumber': number.replaceAll(' ', ''),
       'holder': holder,
@@ -27,5 +27,10 @@ class CreditCard {
       'securityCode': securityCode,
       'brand': brand,
     };
+  }
+
+  @override
+  String toString() {
+    return 'CreditCard{number: $number, holder: $holder, expirationDate: $expirationDate, securityCode: $securityCode, brand: $brand}';
   }
 }
