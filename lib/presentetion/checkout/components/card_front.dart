@@ -1,3 +1,4 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:credit_card_type_detector/credit_card_type_detector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -61,7 +62,7 @@ class CardFront extends StatelessWidget {
                     keyboardType: TextInputType.number,
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(16),
+                      CartaoBancarioInputFormatter(),
                     ],
                     onSaved: creditCard.setNumber,
                     onFieldSubmitted: (_) {
@@ -70,7 +71,7 @@ class CardFront extends StatelessWidget {
                     focusNode: numberFocus,
                     validator: (number) {
                       if (number.isEmpty ||
-                          number.length != 16 ||
+                          number.length != 19 ||
                           detectCCType(number) == CreditCardType.unknown) {
                         return 'Inválido';
                       }
