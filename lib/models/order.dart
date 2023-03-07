@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:loja_virtual/models/adress.dart';
 import 'package:loja_virtual/models/cart_manager.dart';
 import 'package:loja_virtual/models/cart_product.dart';
+import 'package:loja_virtual/services/cielo_payment.dart';
 
 enum Status { canceled, preparing, transporting, delivered }
 
@@ -97,11 +99,17 @@ class Order {
         : null;
   }
 
-  void cancel() {
-    status = Status.canceled;
-    firestore
-        .collection('orders')
-        .doc(orderId)
-        .update({'status': status.index});
+  Future<void> cancel() async {
+    try {
+      await CieloPayment().cancel(payId);
+      status = Status.canceled;
+      firestore
+          .collection('orders')
+          .doc(orderId)
+          .update({'status': status.index});
+    } on Exception catch (e) {
+      debugPrint('Erro ao cancelar: $e');
+      return Future.error('Falha ao cancelar');
+    }
   }
 }

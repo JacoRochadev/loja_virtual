@@ -49,13 +49,13 @@ class CheckoutManager extends ChangeNotifier {
       return;
     }
 
-    // try {
-    //   await _decrementStock();
-    // } catch (e) {
-    //   onStockFail(e);
-    //   loading = false;
-    //   return;
-    // }
+    try {
+      await _decrementStock();
+    } catch (e) {
+      onStockFail(e);
+      loading = false;
+      return;
+    }
 
     try {
       await cieloPayment.capture(payId);

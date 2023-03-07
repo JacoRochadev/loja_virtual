@@ -86,6 +86,7 @@ class OrderTile extends StatelessWidget {
                   onPressed: () {
                     showDialog(
                       context: context,
+                      barrierDismissible: false,
                       builder: (_) =>
                           ExportAddressDialog(address: order.adress),
                     );

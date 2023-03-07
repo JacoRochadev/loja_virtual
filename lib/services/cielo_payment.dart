@@ -54,7 +54,31 @@ class CieloPayment {
       final data = Map<String, dynamic>.from(response.data as LinkedHashMap);
 
       if (data['success'] as bool) {
-        return;
+        debugPrint('Capturado com sucesso');
+      } else {
+        debugPrint('${data['error']['message']}');
+        return Future.error(data['error']['message']);
+      }
+    } catch (e) {
+      debugPrint('Erro no pagamento: $e');
+      return Future.error('Falha ao processar o pagamento');
+    }
+  }
+
+  Future<void> cancel(String payId) async {
+    try {
+      final Map<String, dynamic> cancelData = {
+        'payId': payId,
+      };
+
+      final HttpsCallable callable =
+          functions.httpsCallable('cancelCreditCard');
+      final response = await callable.call(cancelData);
+
+      final data = Map<String, dynamic>.from(response.data as LinkedHashMap);
+
+      if (data['success'] as bool) {
+        debugPrint('Cancelado com sucesso');
       } else {
         debugPrint('${data['error']['message']}');
         return Future.error(data['error']['message']);
