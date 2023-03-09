@@ -30,12 +30,7 @@ class CardFront extends StatelessWidget {
     return Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          gradient: const LinearGradient(
-            colors: [
-              Color(0xFF134B52),
-              Color(0xFF134B52),
-            ],
-          ),
+          color: Colors.brown[700],
         ),
         child: Padding(
           padding: const EdgeInsets.all(24.0),

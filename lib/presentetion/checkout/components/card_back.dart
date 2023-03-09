@@ -14,7 +14,7 @@ class CardBack extends StatelessWidget {
     return Card(
       clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      color: const Color(0xFF134B52),
+      color: Colors.brown[700],
       child: SizedBox(
         height: 200,
         child: Column(

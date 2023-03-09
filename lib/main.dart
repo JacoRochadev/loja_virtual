@@ -77,10 +77,9 @@ class MyApp extends StatelessWidget {
         title: 'Loja virtual',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primaryColor: const Color.fromARGB(255, 4, 125, 141),
-          scaffoldBackgroundColor: const Color.fromARGB(255, 4, 125, 141),
-          appBarTheme: const AppBarTheme(
-              elevation: 0, color: Color.fromARGB(255, 4, 125, 141)),
+          primaryColor: Colors.brown[700],
+          scaffoldBackgroundColor: Colors.brown[400],
+          appBarTheme: AppBarTheme(elevation: 1, color: Colors.brown[700]),
         ),
         onGenerateRoute: (settings) {
           switch (settings.name) {
