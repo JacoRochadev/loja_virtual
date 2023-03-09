@@ -62,6 +62,7 @@ class CheckoutScreen extends StatelessWidget {
                       onPressed: () {
                         if (formKey.currentState.validate()) {
                           formKey.currentState.save();
+
                           return checkoutManager.checkout(
                             onPayFail: (e) {
                               debugPrint('Falha ao realizar o pagamento: $e');

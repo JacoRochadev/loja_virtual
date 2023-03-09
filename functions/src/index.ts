@@ -94,14 +94,14 @@ exports.authorizeCreditCard = functions.https.onCall(async (data, context) => {
             identityType: 'CPF',
             email: userData.email,
             deliveryAddress: {
-                street: userData.address.street,
-                number: userData.address.number,
-                complement: userData.address.complement,
-                zipCode: userData.address.zipCode.replace('.', '').replace('-', ''),
-                city: userData.address.city,
-                state: userData.address.state,
+                street: userData.adress.street,
+                number: userData.adress.number,
+                complement: userData.adress.complement,
+                zipCode: userData.adress.zip.replace('.', '').replace('-', ''),
+                city: userData.adress.city,
+                state: userData.adress.state,
                 country: 'BRA',
-                district: userData.address.district,
+                district: userData.adress.district,
             }
         },
         payment: {

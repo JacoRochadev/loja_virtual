@@ -4,16 +4,22 @@ import 'package:loja_virtual/models/credit_card.dart';
 import 'package:loja_virtual/presentetion/checkout/components/card_back.dart';
 import 'package:loja_virtual/presentetion/checkout/components/card_front.dart';
 
-class CreditCardWidget extends StatelessWidget {
+class CreditCardWidget extends StatefulWidget {
+  const CreditCardWidget({Key key, this.creditCard}) : super(key: key);
+
+  final CreditCard creditCard;
+
+  @override
+  State<CreditCardWidget> createState() => _CreditCardWidgetState();
+}
+
+class _CreditCardWidgetState extends State<CreditCardWidget> {
   final GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
-  CreditCardWidget({Key key, this.creditCard}) : super(key: key);
 
   final FocusNode numberFocus = FocusNode();
   final FocusNode dateFocus = FocusNode();
   final FocusNode nameFocus = FocusNode();
   final FocusNode cvvFocus = FocusNode();
-
-  final CreditCard creditCard;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +33,7 @@ class CreditCardWidget extends StatelessWidget {
             direction: FlipDirection.HORIZONTAL,
             speed: 700,
             front: CardFront(
-              creditCard: creditCard,
+              creditCard: widget.creditCard,
               numberFocus: numberFocus,
               dateFocus: dateFocus,
               nameFocus: nameFocus,
@@ -37,7 +43,7 @@ class CreditCardWidget extends StatelessWidget {
               },
             ),
             back: CardBack(
-              creditCard: creditCard,
+              creditCard: widget.creditCard,
               cvvFocus: cvvFocus,
             ),
           ),
