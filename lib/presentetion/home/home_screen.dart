@@ -18,11 +18,11 @@ class HomeScreen extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color.fromARGB(255, 211, 118, 130),
-                  Color.fromARGB(255, 253, 181, 168),
+                  Colors.brown[700],
+                  Colors.brown[300],
                 ],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -36,10 +36,11 @@ class HomeScreen extends StatelessWidget {
                 snap: true,
                 elevation: 0,
                 backgroundColor: Colors.transparent,
-                flexibleSpace: const FlexibleSpaceBar(
-                  title: Text('Restaurante da Ponte'),
-                  centerTitle: true,
+                title: Image.asset(
+                  'assets/app/logo.png',
+                  height: 140,
                 ),
+                centerTitle: true,
                 actions: [
                   IconButton(
                     icon: const Icon(Icons.shopping_cart),

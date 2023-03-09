@@ -46,7 +46,7 @@ class _BaseScreenState extends State<BaseScreen> {
               Scaffold(
                 drawer: const DrawerCustomComponent(),
                 appBar: AppBar(
-                  title: const Text('Home4'),
+                  title: const Text('Em desenvolvimento...'),
                 ),
               ),
               if (userManager.adminEnabled) ...[
