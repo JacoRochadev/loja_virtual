@@ -8,7 +8,10 @@ class UserModel {
     id = document.id;
     name = document['name'] as String;
     email = document['email'] as String;
-    cpf = document['cpf'] as String;
+    if (document.data().toString().contains('cpf')) {
+      cpf = document['cpf'] as String;
+    }
+
     if (document.data().toString().contains('adress')) {
       adress = Adress.fromMap(document['adress'] as Map<String, dynamic>);
     }

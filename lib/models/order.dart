@@ -26,7 +26,9 @@ class Order {
     adress = Adress.fromMap(document['adress'] as Map<String, dynamic>);
     date = document['date'] as Timestamp;
     status = Status.values[document['status'] as int];
-    payId = document['payId'] as String;
+    if (document.data().toString().contains('payId')) {
+      payId = document['payId'] as String;
+    }
   }
 
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
