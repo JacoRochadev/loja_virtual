@@ -15,6 +15,7 @@ import 'package:loja_virtual/presentetion/login/login_screen.dart';
 import 'package:loja_virtual/presentetion/product/product_screen.dart';
 import 'package:loja_virtual/presentetion/select_product/select_product_screen.dart';
 import 'package:provider/provider.dart';
+
 import 'models/admin_orders_manager.dart';
 import 'models/product.dart';
 import 'models/product_manager.dart';
@@ -127,7 +128,9 @@ class MyApp extends StatelessWidget {
             case '/':
             default:
               return MaterialPageRoute(
-                  builder: (_) => const BaseScreen(), settings: settings);
+                builder: (_) => const BaseScreen(),
+                settings: settings,
+              );
           }
         },
       ),
