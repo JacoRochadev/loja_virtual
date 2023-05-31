@@ -11,6 +11,7 @@ class DrawerHeaderCustomComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Theme.of(context).primaryColor,
       padding: const EdgeInsets.fromLTRB(32, 24, 16, 8),
       height: 180,
       child: Consumer<UserManager>(
@@ -19,12 +20,9 @@ class DrawerHeaderCustomComponent extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text(
-                'Loja do\nJacó',
-                style: Theme.of(context).textTheme.headlineMedium.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
+              Image.asset(
+                'assets/app/logo.png',
+                height: 100,
               ),
               Text(
                 'Olá, ${userManager.userModel?.name ?? ''}',
@@ -32,7 +30,7 @@ class DrawerHeaderCustomComponent extends StatelessWidget {
                 maxLines: 2,
                 style: Theme.of(context).textTheme.titleLarge.copyWith(
                       fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                      color: Colors.white,
                     ),
               ),
               GestureDetector(
@@ -48,7 +46,7 @@ class DrawerHeaderCustomComponent extends StatelessWidget {
                   userManager.isLoggedIn ? 'Sair' : 'Entre ou cadastre-se >',
                   style: Theme.of(context).textTheme.titleMedium.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: Theme.of(context).primaryColor,
+                        color: Colors.white,
                       ),
                 ),
               ),

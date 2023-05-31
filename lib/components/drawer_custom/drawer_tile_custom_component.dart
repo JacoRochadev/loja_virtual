@@ -14,7 +14,6 @@ class DrawerTileCustomComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final int curPage = context.watch<PageManager>().page;
-    final Color primaryColor = Theme.of(context).primaryColor;
 
     return InkWell(
       onTap: () {
@@ -29,13 +28,13 @@ class DrawerTileCustomComponent extends StatelessWidget {
               child: Icon(
                 icon,
                 size: 32,
-                color: curPage == page ? primaryColor : Colors.grey[700],
+                color: curPage == page ? Colors.white : Colors.grey,
               ),
             ),
             Text(
               title,
               style: Theme.of(context).textTheme.bodyLarge.copyWith(
-                    color: curPage == page ? primaryColor : Colors.grey[700],
+                    color: curPage == page ? Colors.white : Colors.grey,
                   ),
             ),
           ],

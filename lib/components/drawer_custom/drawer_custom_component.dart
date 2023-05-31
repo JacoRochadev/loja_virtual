@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:loja_virtual/components/drawer_custom/drawer_header_custom_component.dart';
-
 import 'package:loja_virtual/components/drawer_custom/drawer_tile_custom_component.dart';
 import 'package:provider/provider.dart';
 
@@ -17,29 +16,32 @@ class DrawerCustomComponent extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Color.fromARGB(255, 203, 236, 241),
-                  Colors.white,
-                ],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-              ),
-            ),
+            color: Colors.brown[900],
           ),
           ListView(
             children: <Widget>[
               const DrawerHeaderCustomComponent(),
-              const Divider(),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8),
+                child: Divider(
+                  color: Colors.white,
+                ),
+              ),
               const DrawerTileCustomComponent(
-                  icon: Icons.home, title: 'Início', page: 0),
+                icon: Icons.home,
+                title: 'Início',
+                page: 0,
+              ),
               const DrawerTileCustomComponent(
-                  icon: Icons.list, title: 'Produtos', page: 1),
+                icon: Icons.list,
+                title: 'Produtos',
+                page: 1,
+              ),
               const DrawerTileCustomComponent(
-                  icon: Icons.playlist_add_check,
-                  title: 'Meus Pedidos',
-                  page: 2),
+                icon: Icons.playlist_add_check,
+                title: 'Meus Pedidos',
+                page: 2,
+              ),
               const DrawerTileCustomComponent(
                 icon: Icons.location_on,
                 title: 'Lojas',
@@ -50,7 +52,12 @@ class DrawerCustomComponent extends StatelessWidget {
                   if (userManager.adminEnabled) {
                     return Column(
                       children: const [
-                        Divider(),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          child: Divider(
+                            color: Colors.white,
+                          ),
+                        ),
                         DrawerTileCustomComponent(
                           icon: Icons.settings,
                           title: 'Usuários',
